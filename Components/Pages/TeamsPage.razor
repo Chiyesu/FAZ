@@ -1,0 +1,64 @@
+@page "/teams"
+@using Data
+@inject TeamServices teamServices
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+<h1>Welcome to teams view</h1>
+<form>
+    <div class="row">
+        <div class="col-3">
+            <label class="form-label">Team ID</label>
+            <input type="number" class="form-control">
+        </div>
+        <div class="col-3">
+            <label class="form-label">Name</label>
+            <input type="string" class="form-control">
+        </div>
+        <div class="col-3">
+            <label class="form-label">Main Stadium</label>
+            <input type="string" class="form-control">
+        </div>
+        <div class="col-3">
+            <label class="form-label">City</label>
+            <input type="string" class="form-control">
+        </div>
+    </div>
+    <button type="button" class="btn btn-success col-12 my-2">Add Team</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>TeamID</th>
+            <th>TeamName</th>
+            <th>MainStadium</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var team in teams){
+            <tr>
+                <td>@team.TeamId</td>
+                <td>@team.TeamName</td>
+                <td>@team.MainStadium</td>
+                <td>@team.City</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+    public List<Team> teams = new List<Team>();
+    public Team newTeam = new Team();
+    public async Task AddTeam()
+    {
+        // adding to the database
+        await teamServices.Post(newTeam);
+        teams = teamServices.Get();
+        newTeam = new();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+
+        teams = teamServices.Get();
+    }
+}    using Services;
