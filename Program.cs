@@ -1,6 +1,7 @@
 using Data;
 using FAZ.Components;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<ApplicationDatabaseContext>(
     options => options.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString))
 );
 
+builder.Services.AddScoped<TeamServices>();
+builder.Services.AddScoped<RefereeServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
