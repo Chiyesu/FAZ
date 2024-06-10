@@ -1,0 +1,64 @@
+@page "/referee"
+@using Data
+@inject RefereeServices refereeSeervices
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+<h1>Referee View Page</h1>
+<form>
+    <div class="row">
+        <div class="col-3">
+            <label class="form-label">Referee Id</label>
+            <input type="number" class="form-control" @bind=newReferee.RefereeId>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Referee Name</label>
+            <input type="string" class="form-control" @bind=newReferee.RefereeName>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Date Of Birth</label>
+            <input type="date" class="form-control" @bind=newReferee.DateOfBirth>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Years Of Experience</label>
+            <input type="number" class="form-control" @bind=newReferee.YearsOfExperience>
+        </div>
+    </div>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddReferee">Add Referee</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>RefereeId</th>
+            <th>RefereeName</th>
+            <th>DateOfBirth</th>
+            <th>YearsOfExperience</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var referee in referees){
+        <tr>
+            <td>@referee.RefereeId</td>
+            <td>@referee.RefereeName</td>
+            <td>@referee.DateOfBirth</td>
+            <td>@referee.YearsOfExperience</td>
+        </tr>
+        }
+    </tbody>
+</table>
+@code{
+    public List<Referee> referees = new List<Referee>();
+    public Referee newReferee = new Referee();
+    public async Task AddReferee(){
+        // adding to the database
+        await refereeSeervices.Post(newReferee);
+        referees = refereeSeervices.Get();
+        newReferee = new();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+        referees = refereeSeervices.Get();
+    }
+}
