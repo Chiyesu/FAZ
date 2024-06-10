@@ -8,23 +8,64 @@ Using Data
     <div class="row">
         <div class="col-3">
             <label class="form-label">Player Id</label>
-            <input type="number" class="form-control" @bind=newReferee.RefereeId>
+            <input type="number" class="form-control" @bind=newplayer.PlayerId>
         </div>
 
         <div class="col-3">
             <label class="form-label">Player Name</label>
-            <input type="string" class="form-control" @bind=newReferee.RefereeName>
+            <input type="string" class="form-control" @bind=newPlayer.PlayerName>
         </div>
 
         <div class="col-3">
             <label class="form-label">Date Of Birth</label>
-            <input type="date" class="form-control" @bind=newReferee.DateOfBirth>
+            <input type="date" class="form-control" @bind=newPlayer.DateOfBirth>
         </div>
 
         <div class="col-3">
-            <label class="form-label">Years Of Experience</label>
-            <input type="number" class="form-control" @bind=newReferee.YearsOfExperience>
+            <label class="form-label">Shirt Number</label>
+            <input type="number" class="form-control" @bind=newPlayer.ShirtNumber>
+        </div>
+        <div class="col-3">
+            <label class="form-label">Team Id</label>
+            <input type="number" class="form-control" @bind=newPlayer.TeamId>
         </div>
     </div>
-    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddReferee">Add Referee</button>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddPLayer">Add Player</button>
 </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PlayerId</th>
+            <th>PlayerName</th>
+            <th>DateOfBirth</th>
+            <th>ShirtNumber</th>
+            <th>TeamId</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var player in players){
+        <tr>
+            <td>@player.PlayerId</td>
+            <td>@player.PLayerName</td>
+            <td>@player.DateOfBirth</td>
+            <td>@player.ShirtNumber</td>
+            <td>@team.TeamId</td>
+        </tr>
+        }
+    </tbody>
+</table>
+@code{
+    public List<Player> players = new List<Player>();
+    public PLayer newPlayer = new Player();
+    public async Task AddPlayer(){
+        // adding to the database
+        await PlayerServices.Post(newPlayer);
+        players = playerServices.Get();
+        newPlayer = new();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+        player = playerServices.Get();
+    }
+}

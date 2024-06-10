@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\Faz-WebApp-main\\FAZ.csproj": {}
+    "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\FAZ-WebApp-main\\FAZ.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\Faz-WebApp-main\\FAZ.csproj": {
+    "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\FAZ-WebApp-main\\FAZ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\Faz-WebApp-main\\FAZ.csproj",
+        "projectUniqueName": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\FAZ-WebApp-main\\FAZ.csproj",
         "projectName": "FAZ",
-        "projectPath": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\Faz-WebApp-main\\FAZ.csproj",
+        "projectPath": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\FAZ-WebApp-main\\FAZ.csproj",
         "packagesPath": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\Faz-WebApp-main\\obj\\",
+        "outputPath": "C:\\Users\\sepok_ble77qw\\Downloads\\FAZ-WebApp-main (1)\\FAZ-WebApp-main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sepok_ble77qw\\AppData\\Roaming\\NuGet\\NuGet.Config"
