@@ -1,4 +1,15 @@
-@page "/viewMatches"
-
+@page "/viewMat@using "
+@using Data
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+@inject MatchServices matchServices
+@inject TeamServices teamServices 
 
 <h1>View Matches</h1>
+<form>
+    <div class="row">
+        <div class="col-3">
+            <label class="form-lable">MatchId</label>
+            <input type="number" class="form-control">
+        </div>
+    </div>
+</form>
