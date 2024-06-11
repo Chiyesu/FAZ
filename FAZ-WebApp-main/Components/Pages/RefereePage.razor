@@ -1,6 +1,7 @@
 @page "/referee"
 @using Data
-@inject RefereeServices refereeSeervices
+@inject RefereeServices refereeServices
+@inject TeamServices teamServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 <h1>Referee View Page</h1>
 <form>
@@ -53,12 +54,12 @@
     public Referee newReferee = new Referee();
     public async Task AddReferee(){
         // adding to the database
-        await refereeSeervices.Post(newReferee);
-        referees = refereeSeervices.Get();
+        await refereeServices.Post(newReferee);
+        referees = refereeServices.Get();
         newReferee = new();
         StateHasChanged();
     }
     protected override async Task OnInitializedAsync(){
-        referees = refereeSeervices.Get();
+        referees = refereeServices.Get();
     }
 }

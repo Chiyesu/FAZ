@@ -1,14 +1,15 @@
 @page "/players"
 Using Data
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
-@inject PlayerServices playerservices
+@inject PlayerServices playerServices
+@inject TeamServices teamServices
 
-<h1>PLayer View Page</h1>
+<h1>Player View Page</h1>
 <form>
     <div class="row">
         <div class="col-3">
             <label class="form-label">Player Id</label>
-            <input type="number" class="form-control" @bind=newplayer.PlayerId>
+            <input type="number" class="form-control" @bind=newPlayer.PlayerId>
         </div>
 
         <div class="col-3">
@@ -25,12 +26,8 @@ Using Data
             <label class="form-label">Shirt Number</label>
             <input type="number" class="form-control" @bind=newPlayer.ShirtNumber>
         </div>
-        <div class="col-3">
-            <label class="form-label">Team Id</label>
-            <input type="number" class="form-control" @bind=newPlayer.TeamId>
-        </div>
     </div>
-    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddPLayer">Add Player</button>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddPlayer">Add Player</button>
 </form>
 
 <table class="table">
@@ -47,9 +44,15 @@ Using Data
         @foreach(var player in players){
         <tr>
             <td>@player.PlayerId</td>
-            <td>@player.PLayerName</td>
+            <td>@player.PlayerName</td>
             <td>@player.DateOfBirth</td>
             <td>@player.ShirtNumber</td>
+        </tr>
+        }
+    </tbody>
+    <tbody>
+        @foreach(var team in teams){
+        <tr>
             <td>@team.TeamId</td>
         </tr>
         }
@@ -57,15 +60,17 @@ Using Data
 </table>
 @code{
     public List<Player> players = new List<Player>();
-    public PLayer newPlayer = new Player();
+    public Player newPlayer = new Player();
+    public List<Team> teams = new List<Team>();
     public async Task AddPlayer(){
         // adding to the database
-        await PlayerServices.Post(newPlayer);
+        await playerServices.Post(newPlayer);
         players = playerServices.Get();
         newPlayer = new();
         StateHasChanged();
     }
     protected override async Task OnInitializedAsync(){
-        player = playerServices.Get();
-    }
+        players = playerServices.Get();
+        teams = teamServices.Get();
+    }   
 }

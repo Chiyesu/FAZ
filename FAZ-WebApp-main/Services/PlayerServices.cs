@@ -12,7 +12,7 @@ public class PlayerServices
         await _dbContext.Players.AddAsync(player);
         await _dbContext.SaveChangesAsync();
     }
-    public List<Referee> Get(){
+    public List<Player> Get(){
         return _dbContext.Players.ToList();
     }
 }
