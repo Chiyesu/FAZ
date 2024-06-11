@@ -15,4 +15,19 @@ public class PlayerServices
     public List<Player> Get(){
         return _dbContext.Players.ToList();
     }
+
+    public async Task Update (Player player)
+    {
+        var existingPlayer = await _dbContext.Players.FindAsync(player.PlayerId);
+        if (existingPlayer != null)
+        {
+            existingPlayer.PlayerName = player.PlayerName;
+            existingPlayer.DateOfBirth = player.DateOfBirth;
+            existingPlayer.ShirtNumber = player.ShirtNumber;
+            existingPlayer.TeamId = player.TeamId;
+
+            _dbContext.Players.Update(existingPlayer);
+            await _dbContext.SaveChangesAsync();
+        }
+    } 
 }
