@@ -1,4 +1,5 @@
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Services;
 
@@ -30,4 +31,14 @@ public class PlayerServices
             await _dbContext.SaveChangesAsync();
         }
     } 
+
+    public async Task Delete (int PlayerId)
+    {
+        var existingPlayer = await _dbContext.Players.FindAsync(PlayerId);
+        if (existingPlayer != null)
+        {
+            _dbContext.Players.Remove(existingPlayer);
+            await _dbContext.SaveChangesAsync();
+        }
+    }    
 }
