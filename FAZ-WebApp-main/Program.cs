@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDatabaseContext>(
 builder.Services.AddScoped<TeamServices>();
 builder.Services.AddScoped<RefereeServices>();
 builder.Services.AddScoped<PlayerServices>();
+builder.Services.AddScoped<MatchServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
