@@ -3,13 +3,14 @@
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @inject MatchServices matchServices
 @inject TeamServices teamServices 
+@inject RefereeServices refereeServices
 
 <h1>View Matches</h1>
 <form>
     <div class="row">
         <div class="col-3">
             <label class="form-lable">MatchId</label>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" @bind="newMatch.MatchId">
         </div>
 
         <div class="col-3">
@@ -35,10 +36,43 @@
         </div>
 
         <div class="col-3">
-            <label class="form-lable">Date Played</label>
-            <input type="date" class="form-control">
+            <label class="form-label">Main Ref</label>
+            <select class="form-control">
+                <option value="">Select MainRef</option>
+                @foreach(var referee in referees)
+                {
+                    <option value="@referee.RefereeId">@referee.RefereeName</option>
+                }
+            </select>
         </div>
-        <button type="button" class="btn btn-success col-12 my-3"></button>
+
+        <div class="col-3">
+            <label class="form-label">Assistant Ref 1</label>
+            <select class="form-control">
+                <option value="">Select AssistantRef1</option>
+                @foreach(var referee in referees)
+                {
+                    <option value="@referee.RefereeId">@referee.RefereeName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Assistant Ref 2</label>
+            <select class="form-control">
+                <option value="">Select AssistantRef1</option>
+                @foreach(var referee in referees)
+                {
+                    <option value="@referee.RefereeId">@referee.RefereeName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-3">
+            <label class="form-lable">Date Played</label>
+            <input type="date" class="form-control" @bind="newMatch.DatePlayed">
+        </div>
+        <button type="button" class="btn btn-success col-12 my-3" @onclick="AddMatch">Update Matches</button>
     </div>
 </form>
 <table class="table">
@@ -47,6 +81,9 @@
             <th>MatchId</th>
             <th>HostTeam</th>
             <th>GuestTeam</th>
+            <th>MainRef</th>
+            <th>AssistantRef1</th>
+            <th>AssistantRef2</th>
             <th>DatePlayed</th>
         </tr>
     </thead>
@@ -54,8 +91,9 @@
         @foreach(var match in matches){
             <tr>
                 <td>@match.MatchId</td>
-                @* <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td>
-                <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td> *@
+                 <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
+                 <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
+                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
                 <td>@match.DatePlayed</td>
             </tr>
         }
@@ -66,6 +104,7 @@
     public List<Match> matches = new List<Match>();
     public Match newMatch = new Match();
     public List<Team> teams = new List<Team>();
+    public List<Referee> referees = new List<Referee>();
     
     public async Task AddMatch(){
         // adding to the database
@@ -77,5 +116,6 @@
     protected override async Task OnInitializedAsync(){
         matches = matchServices.Get();
         teams = teamServices.Get();
+        referees = refereeServices.Get();
     }
 }
