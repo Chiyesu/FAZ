@@ -1,4 +1,4 @@
-@page "/viewMat@using "
+@page "/viewMatches"
 @using Data
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @inject MatchServices matchServices
@@ -54,8 +54,8 @@
         @foreach(var match in matches){
             <tr>
                 <td>@match.MatchId</td>
-                <td>@teams.FirstOrDefault(t =>t.TeamId).TeamName</td>
-                <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td>
+                @* <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td>
+                <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td> *@
                 <td>@match.DatePlayed</td>
             </tr>
         }
@@ -76,5 +76,6 @@
     }
     protected override async Task OnInitializedAsync(){
         matches = matchServices.Get();
+        teams = teamServices.Get();
     }
 }
