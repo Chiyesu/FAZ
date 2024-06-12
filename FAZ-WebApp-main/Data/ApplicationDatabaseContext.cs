@@ -14,4 +14,6 @@ public class ApplicationDatabaseContext : DbContext{
     public DbSet<Referee> Referees { get; set; }
     public DbSet<Substitution> Substitutions { get; set; }
     public DbSet<Team> Teams { get; set; }
+    public DbSet<UserAccount> UserAccounts { get; set; } 
+
 }
