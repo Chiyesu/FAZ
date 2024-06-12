@@ -1,0 +1,44 @@
+@page "/matchParticipant"
+@using Data
+<h1>Match Participant</h1>
+
+<form>
+    <div class="row">
+        <div class="col-2">
+            <label class="form-control">MatchParticipantId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-control">MatchId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-control">PlayerId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-control">GoalScored</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-control">cardRecieved</label>
+            <input type="string" class="form-control">
+        </div>
+    </div>
+    <button type="button" class="btn btn-success col-12 my-3">Update</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>MatchParticipantId</th>
+            <th>MatchId</th>
+            <th>PlayerId</th>
+            <th>GoalScored</th>
+            <th>cardRecieved</th>
+        </tr>
+    </thead>
+</table>
