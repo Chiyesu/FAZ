@@ -1,4 +1,4 @@
-@page "/viewMat@using "
+@page "/viewMatches"
 @using Data
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 @inject MatchServices matchServices
@@ -11,5 +11,71 @@
             <label class="form-lable">MatchId</label>
             <input type="number" class="form-control">
         </div>
+
+        <div class="col-3">
+            <label class="form-label">Host Team</label>
+            <select class="form-control">
+                <option value="">Select Team</option>
+                @foreach (var team in teams)
+                {
+                    <option value="@team.TeamId">@team.TeamName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Guest Team</label>
+            <select class="form-control">
+                <option value="">Select Team</option>
+                @foreach (var team in teams)
+                {
+                    <option value="@team.TeamId">@team.TeamName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-3">
+            <label class="form-lable">Date Played</label>
+            <input type="date" class="form-control">
+        </div>
+        <button type="button" class="btn btn-success col-12 my-3"></button>
     </div>
 </form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>MatchId</th>
+            <th>HostTeam</th>
+            <th>GuestTeam</th>
+            <th>DatePlayed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var match in matches){
+            <tr>
+                <td>@match.MatchId</td>
+                @* <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td>
+                <td>@teams.FirstOrDefault(t => t.TeamId).TeamName</td> *@
+                <td>@match.DatePlayed</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+    public List<Match> matches = new List<Match>();
+    public Match newMatch = new Match();
+    public List<Team> teams = new List<Team>();
+    
+    public async Task AddMatch(){
+        // adding to the database
+        await matchServices.Post(newMatch);
+        matches = matchServices.Get();
+        newMatch = new();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+        matches = matchServices.Get();
+        teams = teamServices.Get();
+    }
+}
