@@ -25,6 +25,7 @@ public class PlayerServices
             existingPlayer.PlayerName = player.PlayerName;
             existingPlayer.DateOfBirth = player.DateOfBirth;
             existingPlayer.ShirtNumber = player.ShirtNumber;
+            existingPlayer.StartYear = player.StartYear;
             existingPlayer.TeamId = player.TeamId;
 
             _dbContext.Players.Update(existingPlayer);

@@ -3,5 +3,6 @@ public class Player{
     public string PlayerName { get; set; }
     public DateOnly DateOfBirth { get; set; }
     public int ShirtNumber { get; set; }
+    public DateOnly StartYear {get; set;} 
     public int TeamId { get; set; }
 }

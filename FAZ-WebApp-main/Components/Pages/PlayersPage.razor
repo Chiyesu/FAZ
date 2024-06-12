@@ -5,6 +5,14 @@
 @inject TeamServices teamServices
 
 <h1>Player View Page</h1>
+
+@if (showErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
 <form>
     <div class="row">
         <div class="col-3">
@@ -28,6 +36,11 @@
         </div>
 
         <div class="col-3">
+            <label class="form-label">Start Year</label>
+            <input type="date" class="form-control" @bind=newPlayer.StartYear>
+        </div>
+
+        <div class="col-3">
             <label class="form-label">Team</label>
             <select class="form-control" @bind=newPlayer.TeamId>
                 <option value="">Select Team</option>
@@ -41,7 +54,6 @@
     <button type="button" class="btn btn-success col-12 my-2" @onclick="SavePlayer">@(isEditing ? "Update Player" : "Add Player")</button>
 </form>
 
-
 <table class="table">
     <thead>
         <tr>
@@ -50,6 +62,7 @@
             <th>DateOfBirth</th>
             <th>ShirtNumber</th>
             <th>TeamName</th>
+            <th>StartYear</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -62,8 +75,10 @@
                 <td>@player.DateOfBirth</td>
                 <td>@player.ShirtNumber</td>
                 <td>@teams.FirstOrDefault(t => t.TeamId == player.TeamId)?.TeamName</td>
+                <td>@player.StartYear</td>
                 <td>
                     <button class="btn btn-primary" @onclick="() => EditPlayer(player)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeletePlayer(player.PlayerId)">Delete</button>x                
                 </td>
             </tr>
         }
@@ -75,23 +90,35 @@
     public Player newPlayer = new Player();
     public List<Team> teams = new List<Team>();
     private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
 
     public async Task SavePlayer()
     {
+            if (string.IsNullOrWhiteSpace(newPlayer.PlayerName) || 
+            newPlayer.DateOfBirth == default || 
+            newPlayer.ShirtNumber <= 0 || 
+            newPlayer.StartYear == default || 
+            newPlayer.TeamId == 0)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            return;
+        }
+
         if (isEditing)
         {
-            // Update the player
             await playerServices.Update(newPlayer); 
         }
         else
         {
-            // Add new player
             await playerServices.Post(newPlayer);
         }
         
         players = playerServices.Get();
         newPlayer = new Player();
         isEditing = false;
+        showErrorMessage = false;  
         StateHasChanged();
     }
 
@@ -103,9 +130,18 @@
             PlayerName = player.PlayerName,
             DateOfBirth = player.DateOfBirth,
             ShirtNumber = player.ShirtNumber,
+            StartYear = player.StartYear,
             TeamId = player.TeamId
         };
         isEditing = true;
+    }
+
+    public async Task DeletePlayer (int playerId)
+    {
+        await playerServices.Delete(playerId);
+        players = playerServices.Get();
+        StateHasChanged();
+        
     }
 
     protected override async Task OnInitializedAsync()
