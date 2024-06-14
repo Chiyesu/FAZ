@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qzqkp+WW7tJNXbX0+QmYg8fKI3YlRCdAU1veT5FqqG4=",
+  "Hash": "421htrC2imTKbgMOWrppMrW9hSfVlraC9jrelCUrSs4=",
   "Source": "FAZ",
   "BasePath": "_content/FAZ",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "FAZ\\wwwroot",
       "Source": "FAZ",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\",
       "BasePath": "_content/FAZ",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css",
       "SourceId": "FAZ",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
     },
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
       "SourceId": "FAZ",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\app.css",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\favicon.png",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\wwwroot\\",
       "BasePath": "_content/FAZ",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
