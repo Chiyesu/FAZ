@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj": {}
+    "c:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj": {
+    "c:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj",
+        "projectUniqueName": "c:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj",
         "projectName": "FAZ",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj",
+        "projectPath": "c:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\",
+        "outputPath": "c:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

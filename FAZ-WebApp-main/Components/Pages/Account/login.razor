@@ -38,16 +38,16 @@
     public HttpContext? HttpContext{get; set;}
     
     [SupplyParameterFromForm]
-    public LoginViewModel Model {get; set; } =new();
+    public LoginViewModels Model {get; set; } =new();
 
     public string? errorMessage;
 
     private async Task Authenticate()
     {
      var userAccount = ApplicationDatabaseContext.UserAccount.
-     Where(x=>x.Username == Model.Username).FirstOrDefault();
+     Where (x=>x.Username == Model.Username).FirstOrDefault();
      if(userAccount is null || userAccount.Password != Model.Password)
-     {
+    {
         errorMessage = "Invalid Username or Password";
         return;
      }
@@ -55,7 +55,7 @@
      var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, Model.Username),
-            new Claim(ClaimTypes.Role, userAccount.Role}
+            new Claim(ClaimTypes.Role, userAccount.Role)
         };
 
     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -63,4 +63,4 @@
     await HttpContext.SignInAsync(principal);
     NavigationManager.NavigateTo("/logout", true);   
 }
-
+}
