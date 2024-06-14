@@ -15,7 +15,7 @@
 
         <div class="col-3">
             <label class="form-label">Host Team</label>
-            <select class="form-control">
+            <select class="form-control" @bind="newMatch.HostTeamId">
                 <option value="">Select Team</option>
                 @foreach (var team in teams)
                 {
@@ -26,7 +26,7 @@
 
         <div class="col-3">
             <label class="form-label">Guest Team</label>
-            <select class="form-control">
+            <select class="form-control" @bind="newMatch.GuestTeamId">
                 <option value="">Select Team</option>
                 @foreach (var team in teams)
                 {
@@ -37,7 +37,7 @@
 
         <div class="col-3">
             <label class="form-label">Main Ref</label>
-            <select class="form-control">
+            <select class="form-control" @bind="newMatch.RefereeId">
                 <option value="">Select MainRef</option>
                 @foreach(var referee in referees)
                 {
@@ -48,7 +48,7 @@
 
         <div class="col-3">
             <label class="form-label">Assistant Ref 1</label>
-            <select class="form-control">
+            <select class="form-control" @bind="newMatch.RefereeId">
                 <option value="">Select AssistantRef1</option>
                 @foreach(var referee in referees)
                 {
@@ -59,8 +59,8 @@
 
         <div class="col-3">
             <label class="form-label">Assistant Ref 2</label>
-            <select class="form-control">
-                <option value="">Select AssistantRef1</option>
+            <select class="form-control" @bind="newMatch.RefereeId">
+                <option value="">Select AssistantRef2</option>
                 @foreach(var referee in referees)
                 {
                     <option value="@referee.RefereeId">@referee.RefereeName</option>
@@ -94,7 +94,9 @@
                  <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
                  <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
                  <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
-                <td>@match.DatePlayed</td>
+                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
+                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
+                 <td>@match.DatePlayed</td>
             </tr>
         }
     </tbody>

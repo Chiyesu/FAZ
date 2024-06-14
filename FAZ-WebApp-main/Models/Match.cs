@@ -4,4 +4,5 @@ public class Match{
     public int GuestTeamId { get; set; }
     public DateOnly DatePlayed { get; set; }
     public string FinalResult { get; set; }
+    public int RefereeId { get; set; }
 }
