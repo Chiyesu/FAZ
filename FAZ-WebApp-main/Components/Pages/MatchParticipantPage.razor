@@ -1,0 +1,77 @@
+@page "/playerStats"
+@using Data
+@inject PlayerServices playerServices
+@inject MatchParticipationServices matchParticipationServices
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+
+<h1>Player Stats</h1>
+<form>
+    <div class="row">
+        <div class="col-2">
+            <label class="form-label">MatchParticipationId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Player</label>
+            <select class="form-control">
+                <option value="">Select Player</option>
+                @foreach(var player in players)
+                {
+                    <options value="@player.PlayerId">@player.PlayerName</options>
+                }
+            </select>
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Goals Scored</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Card Recieved</label>
+            <input type="number" class="form-control">
+        </div>
+        <button type="button" class="btn btn-success col-12 my-2">Update Status</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>MatchParticipationId</th>
+            <th>Player</th>
+            <th>GoalScored</th>
+            <th>MatchId</th>
+            <th>CardStatus</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var matchParticipation in matchParticipations)
+        {
+            <tr>
+                <td>@matchParticipation.MatchParticipationId</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerName</td>
+                <td>@matchParticipation.GoalScored</td>
+                <td>@matchParticipation.Card</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+    public List<MatchParticipation> matchParticipations = new List<MatchParticipation>();
+    public MatchParticipation newMatchParticipation = new MatchParticipation ();
+    public List<Player> players = new List<Player>();
+
+    public async Task AddMatchParticipation(){
+        await matchParticipationServices.Post(newMatchParticipation);
+        matchParticipations = matchParticipationServices.Get();
+        newMatchParticipation = new ();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+        matchParticipations = matchParticipationServices.Get();
+        @* player = playerServices.Get(); *@
+    }
+}

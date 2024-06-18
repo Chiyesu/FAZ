@@ -36,6 +36,11 @@
         </div>
 
         <div class="col-3">
+            <label class="form-lable">FinalResults</label>
+            <input type="string" class="form-control" @bind="newMatch.FinalResult">
+        </div>
+
+        <div class="col-3">
             <label class="form-label">Main Ref</label>
             <select class="form-control" @bind="newMatch.RefereeId">
                 <option value="">Select MainRef</option>
@@ -81,6 +86,7 @@
             <th>MatchId</th>
             <th>HostTeam</th>
             <th>GuestTeam</th>
+            <th>FinalResults</th>
             <th>MainRef</th>
             <th>AssistantRef1</th>
             <th>AssistantRef2</th>
@@ -93,6 +99,7 @@
                 <td>@match.MatchId</td>
                  <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
                  <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
+                 <td>@match.FinalResult</td>
                  <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
                  <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
                  <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>

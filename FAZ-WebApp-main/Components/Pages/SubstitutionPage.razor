@@ -1,0 +1,77 @@
+@page "/substitution"
+@using Data
+@inject SubstitutionServices substitutionService
+@inject PlayerServices playerServices
+@inject TeamServices teamServices
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+
+<h1>Subtitution</h1>
+
+<form>
+    <div class="row">
+        <div class="col-2">
+            <label class="form-label">SubtitutionID</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">MatchId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">PlayerInId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">PlayerOutId</label>
+            <input type="number" class="form-control">
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Time</label>
+            <input type="Time" class="form-control">
+        </div>
+        <button type="button" class="btn btn-success">Update Substitution</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>SubstitutionId</th>
+            <th>PlayerInId</th>
+            <th>PlayerOutId</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var substitution in substitutions){
+            <tr>
+                <td>@substitution.SubstitutionId</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerInId)?.PlayerName</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerOutId)?.PlayerName</td>
+                <td>@substitution.Time</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@code{
+    public List<Substitution> substitutions = new List<Substitution>();
+    public Substitution newSubstitution = new Substitution();
+    public List<Team> teams = new List<Team>();
+    public List<Player> players = new List<Player>();
+
+    public async Task AddSubstitution(){
+        await substitutionService.Post(newSubstitution);
+        substitutions = substitutionService.Get();
+        newSubstitution = new ();
+        StateHasChanged();
+    }
+    protected override async Task OnInitializedAsync(){
+        substitutions = substitutionService.Get();
+        teams = teamServices.Get();
+        players = playerServices.Get();
+    }
+}

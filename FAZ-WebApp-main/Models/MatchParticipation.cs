@@ -1,8 +1,13 @@
 public class MatchParticipation {
     public int MatchParticipationId { get; set; }
     public int PlayerId { get; set; }
-    public int GoalsScored { get; set; }
+    public int GoalScored { get; set; }
     public int MatchId { get; set; }
-    public string YellowCard { get; set; }
-    public string RedCard { get; set; }
+    public CardStatus Card { get; set; } = CardStatus.None;
+}
+
+public enum CardStatus{
+    Red,
+    Yellow,
+    None 
 }
