@@ -53,7 +53,7 @@
 
         <div class="col-3">
             <label class="form-label">Assistant Ref 1</label>
-            <select class="form-control" @bind="newMatch.RefereeId">
+            <select class="form-control" @bind="newMatch.AssistantReferee1Id">
                 <option value="">Select AssistantRef1</option>
                 @foreach(var referee in referees)
                 {
@@ -64,7 +64,7 @@
 
         <div class="col-3">
             <label class="form-label">Assistant Ref 2</label>
-            <select class="form-control" @bind="newMatch.RefereeId">
+            <select class="form-control" @bind="newMatch.AssistantReferee2Id">
                 <option value="">Select AssistantRef2</option>
                 @foreach(var referee in referees)
                 {
@@ -77,9 +77,10 @@
             <label class="form-lable">Date Played</label>
             <input type="date" class="form-control" @bind="newMatch.DatePlayed">
         </div>
-        <button type="button" class="btn btn-success col-12 my-3" @onclick="AddMatch">Update Matches</button>
+        <button type="button" class="btn btn-success col-12 my-3" @onclick="AddOrUpdateMatch">@(isEditing ? "Update Match" : "Add Match")</button>
     </div>
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -91,40 +92,85 @@
             <th>AssistantRef1</th>
             <th>AssistantRef2</th>
             <th>DatePlayed</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var match in matches){
+        @foreach(var match in matches)
+        {
             <tr>
                 <td>@match.MatchId</td>
-                 <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
-                 <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
-                 <td>@match.FinalResult</td>
-                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
-                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
-                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
-                 <td>@match.DatePlayed</td>
+                <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
+                <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
+                <td>@match.FinalResult</td>
+                <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
+                <td>@referees.FirstOrDefault(r => r.RefereeId == match.AssistantReferee1Id)?.RefereeName</td>
+                <td>@referees.FirstOrDefault(r => r.RefereeId == match.AssistantReferee2Id)?.RefereeName</td>
+                <td>@match.DatePlayed</td>
+                 <td>
+                    <div class="d-flex">
+                        <button class="btn btn-primary mr-3" @onclick="() => EditMatch(match)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteMatch(match.MatchId)">Delete</button>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-@code{
+@code {
     public List<Match> matches = new List<Match>();
     public Match newMatch = new Match();
     public List<Team> teams = new List<Team>();
     public List<Referee> referees = new List<Referee>();
-    
-    public async Task AddMatch(){
-        // adding to the database
-        await matchServices.Post(newMatch);
-        matches = matchServices.Get();
-        newMatch = new();
-        StateHasChanged();
-    }
-    protected override async Task OnInitializedAsync(){
+    private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
         matches = matchServices.Get();
         teams = teamServices.Get();
         referees = refereeServices.Get();
+    }
+
+    public async Task AddOrUpdateMatch()
+    {
+        if (isEditing)
+        {
+            await matchServices.Update(newMatch);
+        }
+        else
+        {
+            await matchServices.Post(newMatch);
+        }
+
+        matches = matchServices.Get();
+        newMatch = new Match();
+        isEditing = false;
+        StateHasChanged();
+    }
+
+    public void EditMatch(Match match)
+    {
+        newMatch = new Match
+        {
+            MatchId = match.MatchId,
+            HostTeamId = match.HostTeamId,
+            GuestTeamId = match.GuestTeamId,
+            FinalResult = match.FinalResult,
+            RefereeId = match.RefereeId,
+            AssistantReferee1Id = match.AssistantReferee1Id,
+            AssistantReferee2Id = match.AssistantReferee2Id,
+            DatePlayed = match.DatePlayed
+        };
+        isEditing = true;
+    }
+
+    public async Task DeleteMatch(int matchId)
+    {
+        await matchServices.Delete(matchId);
+        matches = matchServices.Get();
+        StateHasChanged();
     }
 }
