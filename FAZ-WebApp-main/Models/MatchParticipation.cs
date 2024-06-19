@@ -7,7 +7,7 @@ public class MatchParticipation {
 }
 
 public enum CardStatus{
+    None,
     Red,
-    Yellow,
-    None 
+    Yellow
 }

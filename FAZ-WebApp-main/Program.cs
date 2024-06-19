@@ -21,6 +21,8 @@ builder.Services.AddScoped<TeamServices>();
 builder.Services.AddScoped<RefereeServices>();
 builder.Services.AddScoped<PlayerServices>();
 builder.Services.AddScoped<MatchServices>();
+builder.Services.AddScoped<SubstitutionServices>();
+builder.Services.AddScoped<MatchParticipationServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

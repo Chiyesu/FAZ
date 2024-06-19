@@ -3,37 +3,46 @@
 @inject SubstitutionServices substitutionService
 @inject PlayerServices playerServices
 @inject TeamServices teamServices
-@rendermode @(new InteractiveServerRenderMode(prerender:false))
-
+@rendermode @(new InteractiveServerRenderMode(prerender:false)) 
 <h1>Subtitution</h1>
 
 <form>
     <div class="row">
         <div class="col-2">
             <label class="form-label">SubtitutionID</label>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" @bind="newSubstitution.SubstitutionId">
         </div>
 
         <div class="col-2">
             <label class="form-label">MatchId</label>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" @bind="newSubstitution.MatchId">
         </div>
 
         <div class="col-2">
             <label class="form-label">PlayerInId</label>
-            <input type="number" class="form-control">
+            <select class="form-control" @bind="newSubstitution.PlayerInId">
+                <option>Select PlayerIn</option>
+                @foreach(var player in players){
+                    <option value="@player.PlayerId">@player.PlayerName</option>
+                }
+            </select>
         </div>
 
         <div class="col-2">
             <label class="form-label">PlayerOutId</label>
-            <input type="number" class="form-control">
+            <select class="form-control" @bind="newSubstitution.PlayerOutId">
+                <option>Select PlayerOut</option>
+                @foreach(var player in players){
+                    <option value="@player.PlayerId">@player.PlayerName</option>
+                }
+            </select>
         </div>
 
         <div class="col-2">
             <label class="form-label">Time</label>
-            <input type="Time" class="form-control">
+            <input type="Time" class="form-control" @bind="newSubstitution.Time">
         </div>
-        <button type="button" class="btn btn-success">Update Substitution</button>
+        <button type="button" class="btn btn-success col-12 my-3" @onclick="AddSubstitution">Update Substitution</button>
     </div>
 </form>
 
@@ -41,6 +50,7 @@
     <thead>
         <tr>
             <th>SubstitutionId</th>
+            <th>MatchId</th>
             <th>PlayerInId</th>
             <th>PlayerOutId</th>
             <th>Time</th>
@@ -50,6 +60,7 @@
         @foreach (var substitution in substitutions){
             <tr>
                 <td>@substitution.SubstitutionId</td>
+                <td>@substitution.MatchId</td>
                 <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerInId)?.PlayerName</td>
                 <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerOutId)?.PlayerName</td>
                 <td>@substitution.Time</td>
