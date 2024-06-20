@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Cj1Du0JhRBZbyawd8rWTeJ9ZaQu39YXq4YV54RmI2Gyn9yK3hyjCaqpjDJ/gqi7LG+TjXccP5aC0DC5BfumMQQ==",
+  "dgSpecHash": "9OtP2697xWPeyinNe1zR2n89jH9agxOEGsXxSLOG/EC51uFJZT067gBHacPOYXu7A+toPlLRu1siSIn7S1snIQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sepok_ble77qw\\FAZ-WebApp-1\\FAZ-WebApp-main\\FAZ.csproj",
+  "projectFilePath": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\FAZ.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\blazor.bootstrap.3.0.0-preview.1.nupkg.sha512",
     "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

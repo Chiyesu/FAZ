@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddBlazorBootstrap();
 
 var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 if (string.IsNullOrEmpty(ConnectionString)){
@@ -21,6 +22,8 @@ builder.Services.AddScoped<TeamServices>();
 builder.Services.AddScoped<RefereeServices>();
 builder.Services.AddScoped<PlayerServices>();
 builder.Services.AddScoped<MatchServices>();
+builder.Services.AddScoped<SubstitutionServices>();
+builder.Services.AddScoped<MatchParticipationServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
