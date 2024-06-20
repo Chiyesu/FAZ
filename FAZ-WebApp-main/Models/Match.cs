@@ -9,6 +9,6 @@ namespace Data
         public int RefereeId { get; set; } 
         public int AssistantReferee1Id { get; set; } 
         public int AssistantReferee2Id { get; set; }
-        public DateTime DatePlayed { get; set; }
+        public DateOnly DatePlayed { get; set; }
     }
 }

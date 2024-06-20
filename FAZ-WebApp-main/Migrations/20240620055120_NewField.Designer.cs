@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FAZ.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    partial class ApplicationDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240620055120_NewField")]
+    partial class NewField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +39,8 @@ namespace FAZ.Migrations
                     b.Property<int>("AssistantReferee2Id")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("DatePlayed")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DatePlayed")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
