@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "HYSjuROWaTtKar3Q8OllSFcs8YjQixFCsIUf3x18tWc=",
+=======
+  "Hash": "sQn/4LtPEXI+QLc9npoO1u4Bz7pZcrEkTgEJ3zoNU/k=",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
   "Source": "FAZ",
   "BasePath": "_content/FAZ",
   "Mode": "Default",
@@ -10,17 +14,180 @@
     {
       "Name": "FAZ\\wwwroot",
       "Source": "FAZ",
+<<<<<<< HEAD
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css",
       "SourceId": "FAZ",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+=======
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\Blazor.Bootstrap.bundle.scp.css",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "Blazor.Bootstrap.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\Blazor.Bootstrap.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.css",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "blazor.bootstrap.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.css"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.js",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "blazor.bootstrap.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.js"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.pdf.js",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "blazor.bootstrap.pdf.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.pdf.js"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.sortable-list.js",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "blazor.bootstrap.sortable-list.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\blazor.bootstrap.sortable-list.js"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\icon\\128X128.png",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "icon/128X128.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\icon\\128X128.png"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\pdfjs-4.0.379.min.mjs",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "pdfjs-4.0.379.min.mjs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\pdfjs-4.0.379.min.mjs"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\pdfjs-4.0.379.worker.min.mjs",
+      "SourceId": "Blazor.Bootstrap",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\",
+      "BasePath": "_content/Blazor.Bootstrap",
+      "RelativePath": "pdfjs-4.0.379.worker.min.mjs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\pdfjs-4.0.379.worker.min.mjs"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css",
+      "SourceId": "FAZ",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.styles.css",
       "AssetKind": "All",
@@ -33,6 +200,7 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
     },
     {
@@ -40,6 +208,15 @@
       "SourceId": "FAZ",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+=======
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
+      "SourceId": "FAZ",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.bundle.scp.css",
       "AssetKind": "All",
@@ -52,6 +229,7 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
     },
     {
@@ -59,6 +237,15 @@
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
+      "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\app.css",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +261,17 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +287,17 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +313,17 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

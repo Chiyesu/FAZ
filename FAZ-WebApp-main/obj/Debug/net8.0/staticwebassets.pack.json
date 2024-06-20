@@ -1,6 +1,7 @@
 {
   "Files": [
     {
+<<<<<<< HEAD
       "Id": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
       "PackagePath": "staticwebassets\\FAZ.bundle.scp.css"
     },
@@ -18,6 +19,25 @@
     },
     {
       "Id": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
+=======
+      "Id": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
+      "PackagePath": "staticwebassets\\FAZ.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
