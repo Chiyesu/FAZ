@@ -13,36 +13,42 @@
     </div>
 }
 
+<!-- Search bar -->
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search by Player Name..." @bind="searchPlayer" />
+    <button class="btn btn-outline-secondary" type="button" @onclick="SearchPlayers">Search</button>
+</div>
+
 <form>
     <div class="row">
         <div class="col-3">
             <label class="form-label">Player Id</label>
-            <input type="number" class="form-control" @bind=newPlayer.PlayerId>
+            <input type="number" class="form-control" @bind="newPlayer.PlayerId">
         </div>
 
         <div class="col-3">
             <label class="form-label">Player Name</label>
-            <input type="text" class="form-control" @bind=newPlayer.PlayerName>
+            <input type="text" class="form-control" @bind="newPlayer.PlayerName">
         </div>
 
         <div class="col-3">
             <label class="form-label">Date Of Birth</label>
-            <input type="date" class="form-control" @bind=newPlayer.DateOfBirth>
+            <input type="date" class="form-control" @bind="newPlayer.DateOfBirth">
         </div>
 
         <div class="col-3">
             <label class="form-label">Shirt Number</label>
-            <input type="number" class="form-control" @bind=newPlayer.ShirtNumber>
+            <input type="number" class="form-control" @bind="newPlayer.ShirtNumber">
         </div>
 
         <div class="col-3">
             <label class="form-label">Start Year</label>
-            <input type="date" class="form-control" @bind=newPlayer.StartYear>
+            <input type="date" class="form-control" @bind="newPlayer.StartYear">
         </div>
 
         <div class="col-3">
             <label class="form-label">Team</label>
-            <select class="form-control" @bind=newPlayer.TeamId>
+            <select class="form-control" @bind="newPlayer.TeamId">
                 <option value="">Select Team</option>
                 @foreach (var team in teams)
                 {
@@ -54,6 +60,7 @@
     <button type="button" class="btn btn-success col-12 my-2" @onclick="SavePlayer">@(isEditing ? "Update Player" : "Add Player")</button>
 </form>
 
+<!-- Players table -->
 <table class="table">
     <thead>
         <tr>
@@ -67,15 +74,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var player in players)
+        @foreach (var player in filteredPlayers)
         {
             <tr>
                 <td>@player.PlayerId</td>
                 <td>@player.PlayerName</td>
-                <td>@player.DateOfBirth</td>
+                <td>@player.DateOfBirth.ToShortDateString()</td>
                 <td>@player.ShirtNumber</td>
                 <td>@teams.FirstOrDefault(t => t.TeamId == player.TeamId)?.TeamName</td>
-                <td>@player.StartYear</td>
+                <td>@player.StartYear.ToShortDateString()</td>
                 <td>
                     <button class="btn btn-primary" @onclick="() => EditPlayer(player)">Edit</button>
                     <button class="btn btn-danger" @onclick="() => DeletePlayer(player.PlayerId)">Delete</button>                
@@ -87,40 +94,68 @@
 
 @code {
     public List<Player> players = new List<Player>();
+    public List<Player> filteredPlayers = new List<Player>();
     public Player newPlayer = new Player();
     public List<Team> teams = new List<Team>();
     private bool isEditing = false;
     private bool showErrorMessage = false;
     private string errorMessage = string.Empty;
+    private string searchPlayer = "";
 
-    public async Task SavePlayer()
+    protected override async Task OnInitializedAsync()
     {
-            if (string.IsNullOrWhiteSpace(newPlayer.PlayerName) || 
-            newPlayer.DateOfBirth == default || 
-            newPlayer.ShirtNumber <= 0 || 
-            newPlayer.StartYear == default || 
-            newPlayer.TeamId == 0)
-        {
-            errorMessage = "Please fill in all the details.";
-            showErrorMessage = true;
-            return;
-        }
-
-        if (isEditing)
-        {
-            await playerServices.Update(newPlayer); 
-        }
-        else
-        {
-            await playerServices.Post(newPlayer);
-        }
-        
         players = playerServices.Get();
-        newPlayer = new Player();
-        isEditing = false;
-        showErrorMessage = false;  
-        StateHasChanged();
+        teams = teamServices.Get();
+        filteredPlayers = players;
     }
+
+   public async Task SavePlayer()
+{
+    if (string.IsNullOrWhiteSpace(newPlayer.PlayerName) || 
+        newPlayer.DateOfBirth == default || 
+        newPlayer.ShirtNumber <= 0 || 
+        newPlayer.StartYear == default || 
+        newPlayer.TeamId == 0)
+    {
+        errorMessage = "Please fill in all the details.";
+        showErrorMessage = true;
+        return;
+    }
+
+    if (!isEditing && players.Any(p => p.PlayerId == newPlayer.PlayerId))
+    {
+        errorMessage = $"Player with ID '{newPlayer.PlayerId}' already exists.";
+        showErrorMessage = true;
+        return;
+    }
+
+    if (players.Any(p =>
+        p.PlayerName.Equals(newPlayer.PlayerName, StringComparison.OrdinalIgnoreCase) &&
+        p.DateOfBirth == newPlayer.DateOfBirth &&
+        p.ShirtNumber == newPlayer.ShirtNumber &&
+        p.TeamId == newPlayer.TeamId &&
+        p.StartYear == newPlayer.StartYear))
+    {
+        errorMessage = $"A player with similar details already exists.";
+        showErrorMessage = true;
+        return;
+    }
+
+    if (isEditing)
+    {
+        await playerServices.Update(newPlayer); 
+    }
+    else
+    {
+        await playerServices.Post(newPlayer);
+    }
+    
+    players = playerServices.Get();
+    newPlayer = new Player();
+    isEditing = false;
+    showErrorMessage = false;  
+    StateHasChanged();
+}
 
     public void EditPlayer(Player player)
     {
@@ -136,17 +171,22 @@
         isEditing = true;
     }
 
-    public async Task DeletePlayer (int playerId)
+    public async Task DeletePlayer(int playerId)
     {
         await playerServices.Delete(playerId);
         players = playerServices.Get();
         StateHasChanged();
-        
     }
 
-    protected override async Task OnInitializedAsync()
+    public void SearchPlayers()
     {
-        players = playerServices.Get();
-        teams = teamServices.Get();
+        if (string.IsNullOrWhiteSpace(searchPlayer))
+        {
+            filteredPlayers = players; 
+        }
+        else
+        {
+            filteredPlayers = players.Where(p => p.PlayerName.Contains(searchPlayer, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
     }
 }

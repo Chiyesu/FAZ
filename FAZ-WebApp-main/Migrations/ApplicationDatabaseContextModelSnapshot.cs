@@ -22,7 +22,7 @@ namespace FAZ.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Match", b =>
+            modelBuilder.Entity("Data.Match", b =>
                 {
                     b.Property<int>("MatchId")
                         .ValueGeneratedOnAdd()
@@ -30,8 +30,14 @@ namespace FAZ.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchId"));
 
-                    b.Property<DateOnly>("DatePlayed")
-                        .HasColumnType("date");
+                    b.Property<int>("AssistantReferee1Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AssistantReferee2Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatePlayed")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
@@ -42,6 +48,10 @@ namespace FAZ.Migrations
 
                     b.Property<int>("HostTeamId")
                         .HasColumnType("int");
+
+                    b.Property<string>("News")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
                         .HasColumnType("int");
