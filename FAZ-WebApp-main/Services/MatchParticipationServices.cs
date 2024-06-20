@@ -5,6 +5,14 @@ namespace Services;
 public class MatchParticipationServices
 {
     public readonly ApplicationDatabaseContext _dbContext;
+
+    private readonly List<Player> player = new List<Player>();
+
+    public Player GetPlayerByName(string name)
+    {
+        return player.FirstOrDefault(p => p.PlayerName.Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
+
     public MatchParticipationServices (ApplicationDatabaseContext dbContext)
     {
         _dbContext = dbContext;
@@ -15,6 +23,6 @@ public class MatchParticipationServices
         await _dbContext.SaveChangesAsync();
     }
     public List<MatchParticipation> Get(){
-         return _dbContext.MatchParticipation.ToList();
-     }
+        return _dbContext.MatchParticipation.ToList();
+    }
 }

@@ -26,10 +26,20 @@
 
         <div class="col-2">
             <label class="form-label">Player Name</label>
-            <select class="form-control" @bind="newMatchParticipation.PlayerId">
+            <select class="form-control" @bind="newMatchParticipation.PlayerName">
                 <option>Select Player</option>
                 @foreach(var player in players){
-                    <option value="@player.PlayerId">@player.PlayerName</option>
+                    <option value="@player.PlayerName">@player.PlayerName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Player Id</label>
+            <select class="form-control" @bind="newMatchParticipation.PlayerName">
+                <option>Player ID</option>
+                @foreach(var player in players){
+                    <option value="@player.PlayerName">@player.PlayerId</option>
                 }
             </select>
         </div>
@@ -53,6 +63,7 @@
             <th>MatchParticipationId</th>
             <th>Match Date</th>
             <th>Player Name</th>
+            <th>Player Id</th>
             <th>GoalScored</th>
             <th>CardStatus</th>
         </tr>
@@ -63,7 +74,8 @@
             <tr>
                 <td>@matchParticipation.MatchParticipationId</td>
                 <td>@matches.FirstOrDefault(m => m.MatchId == matchParticipation.MatchId)?.DatePlayed</td>
-                <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerName</td>
+                <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerName</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerId</td>
                 <td>@matchParticipation.GoalScored</td>
                 <td>@matchParticipation.Card</td>
             </tr>
@@ -85,7 +97,7 @@
     }
     protected override async Task OnInitializedAsync(){
         matchParticipations = matchParticipationServices.Get();
-        players = playerServices.Get();
+        players = playerServices.Get(); 
         matches= matchServices.Get();
     }
 }
