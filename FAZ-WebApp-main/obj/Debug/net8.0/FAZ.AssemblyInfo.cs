@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FAZ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f7a33176af307e2da565008afdd67fd5092f71a")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5")]
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
 [assembly: System.Reflection.AssemblyProductAttribute("FAZ")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FAZ")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

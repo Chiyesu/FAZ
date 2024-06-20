@@ -36,8 +36,13 @@ namespace FAZ.Migrations
                     b.Property<int>("AssistantReferee2Id")
                         .HasColumnType("int");
 
+<<<<<<< HEAD
                     b.Property<DateOnly>("DatePlayed")
                         .HasColumnType("date");
+=======
+                    b.Property<DateTime>("DatePlayed")
+                        .HasColumnType("datetime(6)");
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
@@ -48,6 +53,10 @@ namespace FAZ.Migrations
 
                     b.Property<int>("HostTeamId")
                         .HasColumnType("int");
+
+                    b.Property<string>("News")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
                         .HasColumnType("int");

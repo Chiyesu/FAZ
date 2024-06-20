@@ -8,23 +8,33 @@
 <h1>Player Stats</h1>
 <form>
     <div class="row">
-        <div class="col-2">
-            <label class="form-label">MatchParticipationId</label>
-            <input type="number" class="form-control" @bind="newMatchParticipation.MatchParticipationId">
+        <div class="col-md-2">
+            <label class="form-label">MatchId</label>
+            <select class="form-control" @bind="newMatchParticipation.MatchId">
+                <option>Select MatchId</option>
+                @foreach(var match in matches)
+                {
+                    <option value="@match.MatchId">@match.MatchId</option>
+                }
+            </select>
         </div>
 
-        <div class="col-2">
+        <div class="col-md-2">
             <label class="form-label">Match Date</label>
             <select class="form-control" @bind="newMatchParticipation.DatePlayed">
                 <option value="">Select Date</option>
                 @foreach(var match in matches)
                 {
+<<<<<<< HEAD
                     <options value="@match.DatePlayed">@match.DatePlayed</options>
+=======
+                    <option value="@match.MatchId">@match.DatePlayed</option>
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
                 }
             </select>
         </div>
 
-        <div class="col-2">
+        <div class="col-md-2">
             <label class="form-label">Player Name</label>
             <select class="form-control" @bind="newMatchParticipation.PlayerName">
                 <option>Select Player</option>
@@ -44,17 +54,17 @@
             </select>
         </div>
 
-        <div class="col-2">
+        <div class="col-md-2">
             <label class="form-label">Goals Scored</label>
             <input type="number" class="form-control" @bind="newMatchParticipation.GoalScored">
         </div>
 
-        <div class="col-2">
-            <label class="form-label">Card Recieved</label>
+        <div class="col-md-2">
+            <label class="form-label">Card Received</label>
             <input type="number" class="form-control" @bind="newMatchParticipation.Card">
         </div>
-        <button type="button" class="btn btn-success col-12 my-2" @onclick="AddMatchParticipation">Update Status</button>
     </div>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddMatchParticipation">Update Status</button>
 </form>
 
 <table class="table">
@@ -73,9 +83,14 @@
         {
             <tr>
                 <td>@matchParticipation.MatchParticipationId</td>
+<<<<<<< HEAD
                 <td>@matches.FirstOrDefault(m => m.DatePlayed == matchParticipation.DatePlayed)?.DatePlayed</td>
                 <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerName</td>
                 <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerId</td>
+=======
+                <td>@matches.FirstOrDefault(m => m.MatchId == matchParticipation.MatchId)?.MatchId</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerName</td>
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
                 <td>@matchParticipation.GoalScored</td>
                 <td>@matchParticipation.Card</td>
             </tr>
@@ -85,19 +100,27 @@
 
 @code{
     public List<MatchParticipation> matchParticipations = new List<MatchParticipation>();
-    public MatchParticipation newMatchParticipation = new MatchParticipation ();
+    public MatchParticipation newMatchParticipation = new MatchParticipation();
     public List<Player> players = new List<Player>();
     public List<Match> matches = new List<Match>();
 
-    public async Task AddMatchParticipation(){
+    public async Task AddMatchParticipation()
+    {
         await matchParticipationServices.Post(newMatchParticipation);
         matchParticipations = matchParticipationServices.Get();
-        newMatchParticipation = new ();
+        newMatchParticipation = new MatchParticipation();
         StateHasChanged();
     }
-    protected override async Task OnInitializedAsync(){
+
+    protected override async Task OnInitializedAsync()
+    {
         matchParticipations = matchParticipationServices.Get();
+<<<<<<< HEAD
         players = playerServices.Get(); 
         matches= matchServices.Get();
+=======
+        players = playerServices.Get();
+        matches = matchServices.Get();
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
     }
 }

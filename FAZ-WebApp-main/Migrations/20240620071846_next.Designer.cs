@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FAZ.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20240606051930_Initials1")]
-    partial class Initials1
+    [Migration("20240620071846_next")]
+    partial class next
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace FAZ.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Match", b =>
+            modelBuilder.Entity("Data.Match", b =>
                 {
                     b.Property<int>("MatchId")
                         .ValueGeneratedOnAdd()
@@ -33,8 +33,14 @@ namespace FAZ.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchId"));
 
-                    b.Property<DateOnly>("DatePlayed")
-                        .HasColumnType("date");
+                    b.Property<int>("AssistantReferee1Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AssistantReferee2Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatePlayed")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
@@ -44,6 +50,13 @@ namespace FAZ.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("HostTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("News")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("RefereeId")
                         .HasColumnType("int");
 
                     b.HasKey("MatchId");
@@ -59,7 +72,10 @@ namespace FAZ.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchParticipationId"));
 
-                    b.Property<int>("GoalsScored")
+                    b.Property<int>("Card")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoalScored")
                         .HasColumnType("int");
 
                     b.Property<int>("MatchId")
@@ -68,17 +84,9 @@ namespace FAZ.Migrations
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RedCard")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("YellowCard")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasKey("MatchParticipationId");
 
-                    b.ToTable("MatchParticipations");
+                    b.ToTable("MatchParticipation");
                 });
 
             modelBuilder.Entity("MatchReferee", b =>
@@ -122,6 +130,9 @@ namespace FAZ.Migrations
                     b.Property<int>("ShirtNumber")
                         .HasColumnType("int");
 
+                    b.Property<DateOnly>("StartYear")
+                        .HasColumnType("date");
+
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
@@ -141,7 +152,7 @@ namespace FAZ.Migrations
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
-                    b.Property<string>("RefereeeName")
+                    b.Property<string>("RefereeName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -187,7 +198,6 @@ namespace FAZ.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TeamId"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("MainStadium")
