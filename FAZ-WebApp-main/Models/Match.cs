@@ -10,6 +10,6 @@ namespace Data
         public int AssistantReferee1Id { get; set; } = new();
         public int AssistantReferee2Id { get; set; } = new();
         public DateTime DatePlayed { get; set; }
-        public string News { get; set; }
+        public string? News { get; set; }
     }
 }

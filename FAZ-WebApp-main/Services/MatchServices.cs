@@ -34,7 +34,7 @@ namespace Services
                 existingMatch.AssistantReferee1Id = match.AssistantReferee1Id;
                 existingMatch.AssistantReferee2Id = match.AssistantReferee2Id;
                 existingMatch.DatePlayed = match.DatePlayed;
-                
+                existingMatch.News = match.News;
 
                 _dbContext.Matches.Update(existingMatch);
                 await _dbContext.SaveChangesAsync();
