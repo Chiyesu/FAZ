@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FAZ.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    partial class ApplicationDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240619130617_updated")]
+    partial class updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,13 +39,8 @@ namespace FAZ.Migrations
                     b.Property<int>("AssistantReferee2Id")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<DateOnly>("DatePlayed")
-                        .HasColumnType("date");
-=======
                     b.Property<DateTime>("DatePlayed")
                         .HasColumnType("datetime(6)");
->>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
@@ -53,10 +51,6 @@ namespace FAZ.Migrations
 
                     b.Property<int>("HostTeamId")
                         .HasColumnType("int");
-
-                    b.Property<string>("News")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
                         .HasColumnType("int");
@@ -76,9 +70,6 @@ namespace FAZ.Migrations
 
                     b.Property<int>("Card")
                         .HasColumnType("int");
-
-                    b.Property<DateOnly>("DatePlayed")
-                        .HasColumnType("date");
 
                     b.Property<int>("GoalScored")
                         .HasColumnType("int");

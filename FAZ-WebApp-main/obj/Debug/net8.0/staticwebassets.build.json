@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
+  "Hash": "HYSjuROWaTtKar3Q8OllSFcs8YjQixFCsIUf3x18tWc=",
+=======
   "Hash": "sQn/4LtPEXI+QLc9npoO1u4Bz7pZcrEkTgEJ3zoNU/k=",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
   "Source": "FAZ",
   "BasePath": "_content/FAZ",
   "Mode": "Default",
@@ -10,13 +14,23 @@
     {
       "Name": "FAZ\\wwwroot",
       "Source": "FAZ",
+<<<<<<< HEAD
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
+<<<<<<< HEAD
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css",
+      "SourceId": "FAZ",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+=======
       "Identity": "C:\\Users\\sepok_ble77qw\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.1\\staticwebassets\\Blazor.Bootstrap.bundle.scp.css",
       "SourceId": "Blazor.Bootstrap",
       "SourceType": "Package",
@@ -173,6 +187,7 @@
       "SourceId": "FAZ",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.styles.css",
       "AssetKind": "All",
@@ -185,6 +200,15 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
+      "OriginalItemSpec": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css",
+      "SourceId": "FAZ",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+=======
       "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\bundle\\FAZ.styles.css"
     },
     {
@@ -192,6 +216,7 @@
       "SourceId": "FAZ",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "FAZ.bundle.scp.css",
       "AssetKind": "All",
@@ -204,6 +229,15 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
+      "OriginalItemSpec": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\app.css",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
       "OriginalItemSpec": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\FAZ.bundle.scp.css"
     },
     {
@@ -211,6 +245,7 @@
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -226,10 +261,17 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
+<<<<<<< HEAD
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
       "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -245,10 +287,17 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
+<<<<<<< HEAD
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
       "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -264,10 +313,17 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
+<<<<<<< HEAD
+      "Identity": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
+      "SourceId": "FAZ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Desktop\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+=======
       "Identity": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\favicon.png",
       "SourceId": "FAZ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\sepok_ble77qw\\webapp3\\FAZ-WebApp\\FAZ-WebApp-main\\wwwroot\\",
+>>>>>>> 3fc6d8c3e1ef367c5c5bce3930a075381e06b7c5
       "BasePath": "_content/FAZ",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

@@ -7,9 +7,19 @@ namespace Data
         public int GuestTeamId { get; set; }
         public string FinalResult { get; set; }
         public int RefereeId { get; set; } 
+<<<<<<< HEAD
+        public int AssistantReferee1Id { get; set; } 
+        public int AssistantReferee2Id { get; set; }
+        public DateOnly DatePlayed { get; set; }
+=======
         public int AssistantReferee1Id { get; set; } = new();
         public int AssistantReferee2Id { get; set; } = new();
         public DateTime DatePlayed { get; set; }
+<<<<<<< HEAD
         public string? News { get; set; }
+=======
+        public string News { get; set; }
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
+>>>>>>> d98226edf6ced9a1264e4e5ab0aa067a92d80933
     }
 }

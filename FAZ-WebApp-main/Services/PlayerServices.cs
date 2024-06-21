@@ -13,6 +13,11 @@ public class PlayerServices
         await _dbContext.Players.AddAsync(player);
         await _dbContext.SaveChangesAsync();
     }
+    public readonly List<Player> player = new List<Player>();
+    public Player GetPlayerByName(string name)
+    {
+        return player.FirstOrDefault(p => p.PlayerName.Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
     public List<Player> Get(){
         return _dbContext.Players.ToList();
     }

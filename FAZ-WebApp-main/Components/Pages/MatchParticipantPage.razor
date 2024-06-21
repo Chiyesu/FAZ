@@ -21,21 +21,35 @@
 
         <div class="col-md-2">
             <label class="form-label">Match Date</label>
-            <select class="form-control" @bind="newMatchParticipation.MatchId">
+            <select class="form-control" @bind="newMatchParticipation.DatePlayed">
                 <option value="">Select Date</option>
                 @foreach(var match in matches)
                 {
+<<<<<<< HEAD
+                    <options value="@match.DatePlayed">@match.DatePlayed</options>
+=======
                     <option value="@match.MatchId">@match.DatePlayed</option>
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
                 }
             </select>
         </div>
 
         <div class="col-md-2">
             <label class="form-label">Player Name</label>
-            <select class="form-control" @bind="newMatchParticipation.PlayerId">
+            <select class="form-control" @bind="newMatchParticipation.PlayerName">
                 <option>Select Player</option>
                 @foreach(var player in players){
-                    <option value="@player.PlayerId">@player.PlayerName</option>
+                    <option value="@player.PlayerName">@player.PlayerName</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-2">
+            <label class="form-label">Player Id</label>
+            <select class="form-control" @bind="newMatchParticipation.PlayerName">
+                <option>Player ID</option>
+                @foreach(var player in players){
+                    <option value="@player.PlayerName">@player.PlayerId</option>
                 }
             </select>
         </div>
@@ -59,6 +73,7 @@
             <th>MatchParticipationId</th>
             <th>Match Date</th>
             <th>Player Name</th>
+            <th>Player Id</th>
             <th>GoalScored</th>
             <th>CardStatus</th>
         </tr>
@@ -68,8 +83,14 @@
         {
             <tr>
                 <td>@matchParticipation.MatchParticipationId</td>
+<<<<<<< HEAD
+                <td>@matches.FirstOrDefault(m => m.DatePlayed == matchParticipation.DatePlayed)?.DatePlayed</td>
+                <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerName</td>
+                <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerId</td>
+=======
                 <td>@matches.FirstOrDefault(m => m.MatchId == matchParticipation.MatchId)?.MatchId</td>
                 <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerName</td>
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
                 <td>@matchParticipation.GoalScored</td>
                 <td>@matchParticipation.Card</td>
             </tr>
@@ -94,7 +115,12 @@
     protected override async Task OnInitializedAsync()
     {
         matchParticipations = matchParticipationServices.Get();
+<<<<<<< HEAD
+        players = playerServices.Get(); 
+        matches= matchServices.Get();
+=======
         players = playerServices.Get();
         matches = matchServices.Get();
+>>>>>>> 7d5fcc349fede68b795664c28161087288f6bb44
     }
 }
