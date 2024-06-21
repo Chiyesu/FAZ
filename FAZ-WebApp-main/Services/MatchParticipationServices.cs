@@ -25,7 +25,8 @@ namespace Services
             var existingParticipation = await _dbContext.MatchParticipation.FindAsync(matchParticipation.MatchParticipationId);
             if (existingParticipation != null)
             {
-                existingParticipation.PlayerId = matchParticipation.PlayerId;
+                existingParticipation.PlayerId = matchParticipation.PlayerId;                
+                existingParticipation.DatePlayed = matchParticipation.DatePlayed;
                 existingParticipation.GoalScored = matchParticipation.GoalScored;
                 existingParticipation.MatchId = matchParticipation.MatchId;
                 existingParticipation.Card = matchParticipation.Card;

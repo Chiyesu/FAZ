@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FAZ.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20240620055504_NewField1")]
-    partial class NewField1
+    [Migration("20240621040714_Dateplayed")]
+    partial class Dateplayed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace FAZ.Migrations
 
                     b.Property<int>("HostTeamId")
                         .HasColumnType("int");
+
+                    b.Property<string>("News")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
                         .HasColumnType("int");
@@ -90,29 +93,6 @@ namespace FAZ.Migrations
                     b.HasKey("MatchParticipationId");
 
                     b.ToTable("MatchParticipation");
-                });
-
-            modelBuilder.Entity("MatchReferee", b =>
-                {
-                    b.Property<int>("MatchRefereeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchRefereeId"));
-
-                    b.Property<int>("MatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RefereeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MatchRefereeId");
-
-                    b.ToTable("matchReferees");
                 });
 
             modelBuilder.Entity("Player", b =>

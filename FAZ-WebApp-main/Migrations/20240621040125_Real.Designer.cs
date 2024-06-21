@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FAZ.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20240620071846_next")]
-    partial class next
+    [Migration("20240621040125_Real")]
+    partial class Real
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,8 +39,8 @@ namespace FAZ.Migrations
                     b.Property<int>("AssistantReferee2Id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DatePlayed")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateOnly>("DatePlayed")
+                        .HasColumnType("date");
 
                     b.Property<string>("FinalResult")
                         .IsRequired()
@@ -53,7 +53,6 @@ namespace FAZ.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("News")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
@@ -75,6 +74,9 @@ namespace FAZ.Migrations
                     b.Property<int>("Card")
                         .HasColumnType("int");
 
+                    b.Property<DateOnly>("DatePlayed")
+                        .HasColumnType("date");
+
                     b.Property<int>("GoalScored")
                         .HasColumnType("int");
 
@@ -84,32 +86,13 @@ namespace FAZ.Migrations
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.HasKey("MatchParticipationId");
-
-                    b.ToTable("MatchParticipation");
-                });
-
-            modelBuilder.Entity("MatchReferee", b =>
-                {
-                    b.Property<int>("MatchRefereeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchRefereeId"));
-
-                    b.Property<int>("MatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RefereeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Role")
+                    b.Property<string>("PlayerName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("MatchRefereeId");
+                    b.HasKey("MatchParticipationId");
 
-                    b.ToTable("matchReferees");
+                    b.ToTable("MatchParticipation");
                 });
 
             modelBuilder.Entity("Player", b =>

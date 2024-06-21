@@ -10,11 +10,11 @@ main[b-2pq2a2lhpb] {
 }
 
 .sidebar[b-2pq2a2lhpb] {
-    background-image: linear-gradient(180deg, rgb(185, 115, 9) 0%, #064729 70%);
+    background-image: linear-gradient(180deg, #b97309 0%, #064729 70%);
 }
 
 .top-row[b-2pq2a2lhpb] {
-    background-color: #f7f7f7;
+    background-color: #b97309;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;
@@ -124,7 +124,7 @@ main[b-2pq2a2lhpb] {
 
     .navbar-brand[b-neian5bnjx] {
         font-size: 1.2rem;
-        color: white;
+        color: rgb(255, 255, 255);
         text-decoration: none;
     }
 

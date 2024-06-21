@@ -50,7 +50,6 @@ namespace FAZ.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("News")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("RefereeId")
@@ -91,29 +90,6 @@ namespace FAZ.Migrations
                     b.HasKey("MatchParticipationId");
 
                     b.ToTable("MatchParticipation");
-                });
-
-            modelBuilder.Entity("MatchReferee", b =>
-                {
-                    b.Property<int>("MatchRefereeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MatchRefereeId"));
-
-                    b.Property<int>("MatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RefereeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MatchRefereeId");
-
-                    b.ToTable("matchReferees");
                 });
 
             modelBuilder.Entity("Player", b =>
