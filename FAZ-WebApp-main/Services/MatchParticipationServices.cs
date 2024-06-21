@@ -1,19 +1,6 @@
 namespace Services
 {
-<<<<<<< HEAD
     public class MatchParticipationServices
-=======
-    public readonly ApplicationDatabaseContext _dbContext;
-
-    private readonly List<Player> player = new List<Player>();
-
-    public Player GetPlayerByName(string name)
-    {
-        return player.FirstOrDefault(p => p.PlayerName.Equals(name, StringComparison.OrdinalIgnoreCase));
-    }
-
-    public MatchParticipationServices (ApplicationDatabaseContext dbContext)
->>>>>>> d98226edf6ced9a1264e4e5ab0aa067a92d80933
     {
         private readonly ApplicationDatabaseContext _dbContext;
 
@@ -58,11 +45,4 @@ namespace Services
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-    public List<MatchParticipation> Get(){
-        return _dbContext.MatchParticipation.ToList();
-    }
-}
->>>>>>> d98226edf6ced9a1264e4e5ab0aa067a92d80933

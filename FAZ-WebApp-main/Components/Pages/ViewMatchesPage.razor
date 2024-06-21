@@ -149,7 +149,7 @@
 
     private async Task LoadData()
     {
-        matches = await matchServices.GetMatchesAsync();
+        matches = matchServices.Get();
         teams = teamServices.Get();
         referees = refereeServices.Get();
         filteredMatches = matches;
@@ -159,22 +159,22 @@
     {
         if (isEditing)
         {
-            await matchServices.UpdateMatchAsync(newMatch);
+            await matchServices.Update(newMatch);
         }
         else
         {
-            await matchServices.AddMatchAsync(newMatch);
+            await matchServices.Post(newMatch);
         }
 
-        await LoadData(); // Refresh data
+        await LoadData();
         newMatch = new Match();
         isEditing = false;
     }
 
     public async Task DeleteMatch(int matchId)
     {
-        await matchServices.DeleteMatchAsync(matchId);
-        await LoadData(); // Refresh data
+        await matchServices.Delete(matchId);
+        await LoadData();
     }
 
     public void EditMatch(Match match)
