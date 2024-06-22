@@ -8,10 +8,10 @@ public class ApplicationDatabaseContext : DbContext{
         
     }
     public DbSet<Match> Matches { get; set; }
-    public DbSet<MatchParticipation> MatchParticipations { get; set; }
-    public DbSet<MatchReferee> matchReferees { get; set; }
+    public DbSet<MatchParticipation> MatchParticipation { get; set; }
     public DbSet<Player> Players { get; set; }
     public DbSet<Referee> Referees { get; set; }
     public DbSet<Substitution> Substitutions { get; set; }
     public DbSet<Team> Teams { get; set; }
+
 }

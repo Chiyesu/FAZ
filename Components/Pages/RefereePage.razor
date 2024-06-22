@@ -1,64 +1,167 @@
 @page "/referee"
 @using Data
-@inject RefereeServices refereeSeervices
+@inject RefereeServices refereeServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
+
 <h1>Referee View Page</h1>
+
+@if (showErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." @bind="searchQuery" />
+    <button class="btn btn-outline-secondary" type="button" @onclick="SearchReferees">Search</button>
+</div>
+
 <form>
     <div class="row">
         <div class="col-3">
             <label class="form-label">Referee Id</label>
-            <input type="number" class="form-control" @bind=newReferee.RefereeId>
+            <input type="number" class="form-control" @bind="newReferee.RefereeId">
         </div>
 
         <div class="col-3">
             <label class="form-label">Referee Name</label>
-            <input type="string" class="form-control" @bind=newReferee.RefereeName>
+            <input type="text" class="form-control" @bind="newReferee.RefereeName">
         </div>
 
         <div class="col-3">
             <label class="form-label">Date Of Birth</label>
-            <input type="date" class="form-control" @bind=newReferee.DateOfBirth>
+            <input type="date" class="form-control" @bind="newReferee.DateOfBirth">
         </div>
 
         <div class="col-3">
             <label class="form-label">Years Of Experience</label>
-            <input type="number" class="form-control" @bind=newReferee.YearsOfExperience>
+            <input type="number" class="form-control" @bind="newReferee.YearsOfExperience">
         </div>
     </div>
-    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddReferee">Add Referee</button>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="SaveReferee">@(isEditing ? "Update Referee" : "Add Referee")</button>
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th>RefereeId</th>
-            <th>RefereeName</th>
-            <th>DateOfBirth</th>
-            <th>YearsOfExperience</th>
+            <th>Referee Id</th>
+            <th>Referee Name</th>
+            <th>Date Of Birth</th>
+            <th>Years Of Experience</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var referee in referees){
-        <tr>
-            <td>@referee.RefereeId</td>
-            <td>@referee.RefereeName</td>
-            <td>@referee.DateOfBirth</td>
-            <td>@referee.YearsOfExperience</td>
-        </tr>
+        @foreach (var referee in filteredReferees)
+        {
+            <tr>
+                <td>@referee.RefereeId</td>
+                <td>@referee.RefereeName</td>
+                <td>@referee.DateOfBirth.ToShortDateString()</td>
+                <td>@referee.YearsOfExperience</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => EditReferee(referee)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteReferee(referee.RefereeId)">Delete</button>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-@code{
+
+@code {
     public List<Referee> referees = new List<Referee>();
+    public List<Referee> filteredReferees = new List<Referee>();
     public Referee newReferee = new Referee();
-    public async Task AddReferee(){
-        // adding to the database
-        await refereeSeervices.Post(newReferee);
-        referees = refereeSeervices.Get();
-        newReferee = new();
-        StateHasChanged();
+    private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
+    private string searchQuery = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        referees = refereeServices.Get();
+        filteredReferees = referees;
     }
-    protected override async Task OnInitializedAsync(){
-        referees = refereeSeervices.Get();
+
+    public async Task SaveReferee()
+    {
+        if (string.IsNullOrWhiteSpace(newReferee.RefereeName) ||
+            newReferee.DateOfBirth == default ||
+            newReferee.YearsOfExperience <= 0)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            return;
+        }
+
+        if (!isEditing && referees.Any(r => r.RefereeId == newReferee.RefereeId))
+        {
+            errorMessage = $"Referee with ID '{newReferee.RefereeId}' already exists.";
+            showErrorMessage = true;
+            return;
+        }
+
+        if (referees.Any(r =>
+            r.RefereeName.Equals(newReferee.RefereeName, StringComparison.OrdinalIgnoreCase) &&
+            r.DateOfBirth == newReferee.DateOfBirth &&
+            r.YearsOfExperience == newReferee.YearsOfExperience))
+        {
+            errorMessage = $"A referee with similar details already exists.";
+            showErrorMessage = true;
+            return;
+        }
+
+        if (isEditing)
+        {
+            await refereeServices.Update(newReferee);
+        }
+        else
+        {
+            await refereeServices.Post(newReferee);
+        }
+
+        referees = refereeServices.Get();
+        filteredReferees = referees;
+        newReferee = new Referee();
+        isEditing = false;
+        showErrorMessage = false;
+    }
+
+    public void EditReferee(Referee referee)
+    {
+        newReferee = new Referee
+        {
+            RefereeId = referee.RefereeId,
+            RefereeName = referee.RefereeName,
+            DateOfBirth = referee.DateOfBirth,
+            YearsOfExperience = referee.YearsOfExperience
+        };
+        isEditing = true;
+    }
+
+    public async Task DeleteReferee(int refereeId)
+    {
+        await refereeServices.Delete(refereeId);
+        referees = refereeServices.Get();
+        filteredReferees = referees;
+    }
+
+    public void SearchReferees()
+    {
+        if (string.IsNullOrWhiteSpace(searchQuery))
+        {
+            filteredReferees = referees;
+        }
+        else
+        {
+            string normalizedQuery = searchQuery.Trim().ToLower();
+            filteredReferees = referees.Where(r =>
+                r.RefereeName.ToLower().Contains(normalizedQuery) ||
+                r.RefereeId.ToString().Contains(normalizedQuery) ||
+                r.DateOfBirth.ToShortDateString().ToLower().Contains(normalizedQuery) ||
+                r.YearsOfExperience.ToString().Contains(normalizedQuery))
+                .ToList();
+        }
     }
 }

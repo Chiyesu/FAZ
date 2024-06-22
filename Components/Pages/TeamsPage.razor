@@ -2,7 +2,15 @@
 @using Data
 @inject TeamServices teamServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
-<h1>Welcome to Teams View</h1>
+<h1>Team View Page</h1>
+
+@if (showErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
 <form>
     <div class="row">
         <div class="col-3">
@@ -22,7 +30,7 @@
             <input type="string" class="form-control" @bind=newTeam.City>
         </div>
     </div>
-    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddTeam">Add Team</button>
+   <button type="button" class="btn btn-success col-12 my-2" @onclick="SaveTeam">@(isEditing ? "Update Team" : "Add Team")</button>
 </form>
 @if (teams == null)
 {
@@ -37,6 +45,7 @@ else
             <th>TeamName</th>
             <th>MainStadium</th>
             <th>City</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -46,24 +55,73 @@ else
                 <td>@team.TeamName</td>
                 <td>@team.MainStadium</td>
                 <td>@team.City</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => EditTeam(team)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteTeam(team.TeamId)">Delete</button>                
+            </td>
             </tr>
         }
     </tbody>
 </table>
 }
+
 @code{
+    
     public List<Team> teams = new List<Team>();
     public Team newTeam = new Team();
-    public async Task AddTeam()
+    private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
+     public async Task SaveTeam()
     {
-        // adding to the database
-        await teamServices.Post(newTeam);
+            if (string.IsNullOrWhiteSpace(newTeam.TeamName) || 
+            newTeam.MainStadium == default || 
+            newTeam.City == default || 
+            newTeam.TeamId == 0)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            return;
+        }
+        
+        if (isEditing)
+        {
+            await teamServices.Update(newTeam); 
+        }
+        else
+        {
+            await teamServices.Post(newTeam);
+        }
+        
         teams = teamServices.Get();
-        newTeam = new();
+        newTeam = new Team();
+        isEditing = false;
+        showErrorMessage = false;  
         StateHasChanged();
     }
-    protected override async Task OnInitializedAsync(){
 
+    public void EditTeam(Team team)
+    {
+        newTeam = new Team
+        {
+            TeamId = team.TeamId,
+            TeamName = team.TeamName,
+            MainStadium = team.MainStadium,
+            City = team.City
+        };
+        isEditing = true;
+    }
+
+    public async Task DeleteTeam (int teamId)
+    {
+        await teamServices.Delete(teamId);
+        teams = teamServices.Get();
+        StateHasChanged();
+        
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
         teams = teamServices.Get();
     }
-}   
+}
