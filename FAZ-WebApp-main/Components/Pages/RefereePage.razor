@@ -1,7 +1,6 @@
 @page "/referee"
 @using Data
 @inject RefereeServices refereeServices
-@inject TeamServices teamServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 
 <h1>Referee View Page</h1>
@@ -14,7 +13,7 @@
 }
 
 <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search by Referee Name..." @bind="searchReferee" />
+    <input type="text" class="form-control" placeholder="Search..." @bind="searchQuery" />
     <button class="btn btn-outline-secondary" type="button" @onclick="SearchReferees">Search</button>
 </div>
 
@@ -43,7 +42,6 @@
     <button type="button" class="btn btn-success col-12 my-2" @onclick="SaveReferee">@(isEditing ? "Update Referee" : "Add Referee")</button>
 </form>
 
-<!-- Referees table -->
 <table class="table">
     <thead>
         <tr>
@@ -78,7 +76,7 @@
     private bool isEditing = false;
     private bool showErrorMessage = false;
     private string errorMessage = string.Empty;
-    private string searchReferee = "";
+    private string searchQuery = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -151,13 +149,19 @@
 
     public void SearchReferees()
     {
-        if (string.IsNullOrWhiteSpace(searchReferee))
+        if (string.IsNullOrWhiteSpace(searchQuery))
         {
             filteredReferees = referees;
         }
         else
         {
-            filteredReferees = referees.Where(r => r.RefereeName.Contains(searchReferee, StringComparison.OrdinalIgnoreCase)).ToList();
+            string normalizedQuery = searchQuery.Trim().ToLower();
+            filteredReferees = referees.Where(r =>
+                r.RefereeName.ToLower().Contains(normalizedQuery) ||
+                r.RefereeId.ToString().Contains(normalizedQuery) ||
+                r.DateOfBirth.ToShortDateString().ToLower().Contains(normalizedQuery) ||
+                r.YearsOfExperience.ToString().Contains(normalizedQuery))
+                .ToList();
         }
     }
 }

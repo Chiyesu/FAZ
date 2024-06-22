@@ -2,22 +2,29 @@
 @using Data
 @inject SubstitutionServices substitutionService
 @inject PlayerServices playerServices
-@inject TeamServices teamServices
 @inject MatchServices matchServices
-@rendermode @(new InteractiveServerRenderMode(prerender:false)) 
-<h1>Substitution</h1>
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+
+<h1>Substitutions View Page</h1>
+
+@if (showErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
 
 <form>
     <div class="row">
         <div class="col-2">
-            <label class="form-label">SubstitutionID</label>
+            <label class="form-label">Substitution ID</label>
             <input type="number" class="form-control" @bind="newSubstitution.SubstitutionId">
         </div>
 
         <div class="col-2">
-            <label class="form-label">MatchId</label>
+            <label class="form-label">Match ID</label>
             <select class="form-control" @bind="newSubstitution.MatchId">
-                <option>Select MatchId</option>
+                <option>Select Match ID</option>
                 @foreach(var match in matches)
                 {
                     <option value="@match.MatchId">@match.MatchId</option>
@@ -26,9 +33,9 @@
         </div>
 
         <div class="col-2">
-            <label class="form-label">PlayerInId</label>
+            <label class="form-label">Player In</label>
             <select class="form-control" @bind="newSubstitution.PlayerInId">
-                <option>Select PlayerIn</option>
+                <option>Select Player In</option>
                 @foreach(var player in players)
                 {
                     <option value="@player.PlayerId">@player.PlayerName</option>
@@ -37,9 +44,9 @@
         </div>
 
         <div class="col-2">
-            <label class="form-label">PlayerOutId</label>
+            <label class="form-label">Player Out</label>
             <select class="form-control" @bind="newSubstitution.PlayerOutId">
-                <option>Select PlayerOut</option>
+                <option>Select Player Out</option>
                 @foreach(var player in players)
                 {
                     <option value="@player.PlayerId">@player.PlayerName</option>
@@ -49,20 +56,21 @@
 
         <div class="col-2">
             <label class="form-label">Time</label>
-            <input type="Time" class="form-control" @bind="newSubstitution.Time">
+            <input type="time" class="form-control" @bind="newSubstitution.Time">
         </div>
-        <button type="button" class="btn btn-success col-12 my-3" @onclick="AddSubstitution">Update Substitution</button>
     </div>
+    <button type="button" class="btn btn-success col-12 my-3" @onclick="SaveSubstitution">@(isEditing ? "Update Substitution" : "Add Substitution")</button>
 </form>
 
 <table class="table">
     <thead>
         <tr>
-            <th>SubstitutionId</th>
-            <th>MatchId</th>
-            <th>PlayerInId</th>
-            <th>PlayerOutId</th>
+            <th>Substitution ID</th>
+            <th>Match ID</th>
+            <th>Player In</th>
+            <th>Player Out</th>
             <th>Time</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -70,10 +78,14 @@
         {
             <tr>
                 <td>@substitution.SubstitutionId</td>
-                <td>@matches.FirstOrDefault(m => m.MatchId == substitution.MatchId)?.MatchId</td>
+                <td>@substitution.MatchId</td>
                 <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerInId)?.PlayerName</td>
                 <td>@players.FirstOrDefault(p => p.PlayerId == substitution.PlayerOutId)?.PlayerName</td>
                 <td>@substitution.Time</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => EditSubstitution(substitution)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteSubstitution(substitution.SubstitutionId)">Delete</button>
+                </td>
             </tr>
         }
     </tbody>
@@ -81,24 +93,80 @@
 
 @code {
     public List<Substitution> substitutions = new List<Substitution>();
-    public Substitution newSubstitution = new Substitution();
-    public List<Team> teams = new List<Team>();
     public List<Player> players = new List<Player>();
     public List<Match> matches = new List<Match>();
-
-    public async Task AddSubstitution()
-    {
-        await substitutionService.Post(newSubstitution);
-        substitutions = substitutionService.Get();
-        newSubstitution = new();
-        StateHasChanged();
-    }
+    public Substitution newSubstitution = new Substitution();
+    private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         substitutions = substitutionService.Get();
-        teams = teamServices.Get();
         players = playerServices.Get();
         matches = matchServices.Get();
+    }
+
+    public async Task SaveSubstitution()
+    {
+        if (newSubstitution.MatchId == 0 ||
+            newSubstitution.PlayerInId == 0 ||
+            newSubstitution.PlayerOutId == 0 ||
+            newSubstitution.Time == null)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            StateHasChanged();
+            return;
+        }
+
+        if (!isEditing && substitutions.Any(s => s.SubstitutionId == newSubstitution.SubstitutionId))
+        {
+            errorMessage = $"Substitution with ID '{newSubstitution.SubstitutionId}' already exists.";
+            showErrorMessage = true;
+            StateHasChanged();
+            return;
+        }
+
+        try
+        {
+            if (isEditing)
+            {
+                await substitutionService.Update(newSubstitution);
+            }
+            else
+            {
+                await substitutionService.Post(newSubstitution);
+            }
+
+            newSubstitution = new Substitution();
+            isEditing = false;
+            showErrorMessage = false;
+            substitutions = substitutionService.Get();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+            showErrorMessage = true;
+        }
+    }
+
+    public void EditSubstitution(Substitution substitution)
+    {
+        newSubstitution = new Substitution
+        {
+            SubstitutionId = substitution.SubstitutionId,
+            MatchId = substitution.MatchId,
+            PlayerInId = substitution.PlayerInId,
+            PlayerOutId = substitution.PlayerOutId,
+            Time = substitution.Time
+        };
+        isEditing = true;
+    }
+
+    public async Task DeleteSubstitution(int substitutionId)
+    {
+        await substitutionService.Delete(substitutionId);
+        substitutions = substitutionService.Get();
     }
 }

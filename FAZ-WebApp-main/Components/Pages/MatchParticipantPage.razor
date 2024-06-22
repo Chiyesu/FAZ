@@ -5,14 +5,22 @@
 @inject MatchParticipationServices matchParticipationServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 
-<h1>Player Stats</h1>
+<h1>Player Stats View</h1>
+
+@if (showErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
 <form>
     <div class="row">
         <div class="col-md-2">
             <label class="form-label">MatchId</label>
-            <select class="form-control" @bind="newMatchParticipation.MatchId">
-                <option>Select MatchId</option>
-                @foreach(var match in matches)
+            <select class="form-control" @onchange="OnMatchIdChange">
+                <option value="">Select MatchId</option>
+                @foreach (var match in matches)
                 {
                     <option value="@match.MatchId">@match.MatchId</option>
                 }
@@ -21,20 +29,15 @@
 
         <div class="col-md-2">
             <label class="form-label">Match Date</label>
-            <select class="form-control" @bind="newMatchParticipation.DatePlayed">
-                <option value="">Select Date</option>
-                @foreach(var match in matches)
-                {
-                    <options value="@match.DatePlayed">@match.DatePlayed</options>
-                }
-            </select>
+            <input type="text" class="form-control" value="@selectedMatchDate" readonly />
         </div>
 
         <div class="col-md-2">
             <label class="form-label">Player Name</label>
-            <select class="form-control" @bind="newMatchParticipation.PlayerName">
+            <select class="form-control" @onchange="OnPlayerNameChange">
                 <option>Select Player</option>
-                @foreach(var player in players){
+                @foreach (var player in players)
+                {
                     <option value="@player.PlayerName">@player.PlayerName</option>
                 }
             </select>
@@ -42,12 +45,7 @@
 
         <div class="col-2">
             <label class="form-label">Player Id</label>
-            <select class="form-control" @bind="newMatchParticipation.PlayerName">
-                <option>Player ID</option>
-                @foreach(var player in players){
-                    <option value="@player.PlayerName">@player.PlayerId</option>
-                }
-            </select>
+            <input type="text" class="form-control" value="@selectedPlayerId" readonly />
         </div>
 
         <div class="col-md-2">
@@ -60,7 +58,7 @@
             <input type="number" class="form-control" @bind="newMatchParticipation.Card">
         </div>
     </div>
-    <button type="button" class="btn btn-success col-12 my-2" @onclick="AddMatchParticipation">Update Status</button>
+    <button type="button" class="btn btn-success col-12 my-2" @onclick="SaveMatchParticipation">@(isEditing ? "Update Participation" : "Add Participation")</button>
 </form>
 
 <table class="table">
@@ -72,41 +70,127 @@
             <th>Player Id</th>
             <th>GoalScored</th>
             <th>CardStatus</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var matchParticipation in matchParticipations)
+        @foreach (var matchParticipation in matchParticipations)
         {
             <tr>
                 <td>@matchParticipation.MatchParticipationId</td>
-                <td>@matches.FirstOrDefault(m => m.DatePlayed == matchParticipation.DatePlayed)?.DatePlayed</td>
-                <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerName</td>
-                <td>@players.FirstOrDefault(p => p.PlayerName == matchParticipation.PlayerName)?.PlayerId</td>
+                <td>@matches.FirstOrDefault(m => m.MatchId == matchParticipation.MatchId)?.DatePlayed.ToString("yyyy-MM-dd")</td>
+                <td>@players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId)?.PlayerName</td>
+                <td>@matchParticipation.PlayerId</td>
                 <td>@matchParticipation.GoalScored</td>
                 <td>@matchParticipation.Card</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => EditMatchParticipation(matchParticipation)">Edit</button>
+                    <button class="btn btn-danger" @onclick="() => DeleteMatchParticipation(matchParticipation.MatchParticipationId)">Delete</button>                
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-@code{
+@code {
     public List<MatchParticipation> matchParticipations = new List<MatchParticipation>();
     public MatchParticipation newMatchParticipation = new MatchParticipation();
     public List<Player> players = new List<Player>();
     public List<Match> matches = new List<Match>();
-
-    public async Task AddMatchParticipation()
-    {
-        await matchParticipationServices.Post(newMatchParticipation);
-        matchParticipations = matchParticipationServices.Get();
-        newMatchParticipation = new MatchParticipation();
-        StateHasChanged();
-    }
+    public string selectedMatchDate { get; set; }
+    public int selectedPlayerId { get; set; }
+    private bool isEditing = false;
+    private bool showErrorMessage = false;
+    private string errorMessage = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         matchParticipations = matchParticipationServices.Get();
-        players = playerServices.Get(); 
-        matches= matchServices.Get();
+        players = playerServices.Get();
+        matches = matchServices.Get();
+    }
+
+    private void OnMatchIdChange(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value.ToString(), out int selectedMatchId))
+        {
+            newMatchParticipation.MatchId = selectedMatchId;
+            var match = matches.FirstOrDefault(m => m.MatchId == selectedMatchId);
+            if (match != null)
+            {
+                selectedMatchDate = match.DatePlayed.ToString("yyyy-MM-dd");
+            }
+        }
+    }
+
+    private void OnPlayerNameChange(ChangeEventArgs e)
+    {
+        var selectedPlayerName = e.Value.ToString();
+        newMatchParticipation.PlayerName = selectedPlayerName;
+        var player = players.FirstOrDefault(p => p.PlayerName == selectedPlayerName);
+        if (player != null)
+        {
+            selectedPlayerId = player.PlayerId;
+            newMatchParticipation.PlayerId = player.PlayerId;
+        }
+    }
+
+    public async Task SaveMatchParticipation()
+    {
+        if (newMatchParticipation.MatchId == 0 ||
+            newMatchParticipation.PlayerId == 0 ||
+            newMatchParticipation.GoalScored < 0 ||
+            newMatchParticipation.Card < 0)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            return;
+        }
+
+        if (isEditing)
+        {
+            await matchParticipationServices.Update(newMatchParticipation);
+        }
+        else
+        {
+            await matchParticipationServices.Post(newMatchParticipation);
+        }
+
+        matchParticipations = matchParticipationServices.Get();
+        newMatchParticipation = new MatchParticipation();
+        selectedMatchDate = string.Empty;
+        selectedPlayerId = 0;
+        isEditing = false;
+        showErrorMessage = false;
+        StateHasChanged();
+    }
+
+    public void EditMatchParticipation(MatchParticipation matchParticipation)
+    {
+        newMatchParticipation = new MatchParticipation
+        {
+            MatchParticipationId = matchParticipation.MatchParticipationId,
+            MatchId = matchParticipation.MatchId,
+            PlayerId = matchParticipation.PlayerId,
+            GoalScored = matchParticipation.GoalScored,
+            Card = matchParticipation.Card
+        };
+
+        selectedMatchDate = matches.FirstOrDefault(m => m.MatchId == matchParticipation.MatchId)?.DatePlayed.ToString("yyyy-MM-dd");
+        var player = players.FirstOrDefault(p => p.PlayerId == matchParticipation.PlayerId);
+        if (player != null)
+        {
+            newMatchParticipation.PlayerName = player.PlayerName;
+            selectedPlayerId = player.PlayerId;
+        }
+
+        isEditing = true;
+    }
+
+    public async Task DeleteMatchParticipation(int matchParticipationId)
+    {
+        await matchParticipationServices.Delete(matchParticipationId);
+        matchParticipations = matchParticipationServices.Get();
+        StateHasChanged();
     }
 }

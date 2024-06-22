@@ -1,6 +1,5 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +28,7 @@ namespace Services
             {
                 existingMatch.HostTeamId = match.HostTeamId;
                 existingMatch.GuestTeamId = match.GuestTeamId;
+                existingMatch.Stadium = match.Stadium;
                 existingMatch.FinalResult = match.FinalResult;
                 existingMatch.RefereeId = match.RefereeId;
                 existingMatch.AssistantReferee1Id = match.AssistantReferee1Id;

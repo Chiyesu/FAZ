@@ -4,9 +4,33 @@
 @inject MatchServices matchServices 
 @inject PlayerServices playerServices 
 
-<PageTitle>Home</PageTitle>
 
 <style>
+    .page-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .section-header {
+        background-color: rgb(24, 75, 8);
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-section {
+        background-color: rgb(233, 97, 6);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
     .card-deck {
         display: flex;
         overflow-x: auto;
@@ -29,33 +53,30 @@
     }
 </style>
 
-<div style="background-color: rgb(24, 75, 8); d-flex justify-content-center align-item-center m-3 rounded-5">
-    <h1 style="color: white;">Football Association Of Zambia - FAZ</h1>
-</div>
-<hr>
-<div style="background-color: rgb(233, 97, 6)">
-    The Football Association Of Zambia - FAZ Information System
-</div>
-
- <h2>Latest Matches</h2>
+<div class="page-container">
+    <div class="section-header">
+        <h1>Admin Dashboard</h1>
+    </div>
+    
+      <h2>Match History</h2>
     <div class="card-deck">
         @foreach (var match in matches)
         {
             var homeTeam = teams.FirstOrDefault(t => t.TeamId == match.HostTeamId);
             var awayTeam = teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId);
-            
-            <div class="card">
-                <div>
-                    <h5>@homeTeam.TeamName vs @awayTeam.TeamName</h5>
-                    <p>Date: @match.DatePlayed.ToShortDateString()</p>
-                    <button @onclick="() => ShowMatchDetails(match)">View Details</button>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@homeTeam?.TeamName vs @awayTeam?.TeamName</h5>
+                    <p class="card-text">Date: @match.DatePlayed.ToShortDateString()</p>
+                    <button class="btn btn-primary" @onclick="() => ShowMatchDetails(match)">View Details</button>
                 </div>
             </div>
         }
     </div>
 
     <div class="card">
-        <div>
+        <div class="card-body">
             @if (selectedMatch == null)
             {
                 <p>Select a match to view details.</p>
@@ -68,10 +89,11 @@
                 <h5>@homeTeam.TeamName vs @awayTeam.TeamName</h5>
                 <p>Date: @selectedMatch.DatePlayed.ToShortDateString()</p>
                 <p>Final Result: @selectedMatch.FinalResult</p>
-                <p> @selectedMatch.News</p> 
+                <p>@selectedMatch.News</p> 
             }
         </div>
     </div>
+</div>
 
 @code {
     List<Team> teams = new List<Team>();

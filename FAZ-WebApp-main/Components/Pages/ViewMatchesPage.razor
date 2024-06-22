@@ -1,15 +1,14 @@
 @page "/viewMatches"
 @using Data
 @inject MatchServices matchServices
-@inject TeamServices teamServices 
+@inject TeamServices teamServices
 @inject RefereeServices refereeServices
 @rendermode @(new InteractiveServerRenderMode(prerender:false))
 
-<h1>View Matches</h1>
+<h1>View Matches Page</h1>
 
-<!-- Search Section -->
 <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search by Host Team, Guest Team, Main Referee or Assistant Referees..." @bind="searchQuery" />
+    <input type="text" class="form-control" placeholder="Search..." @bind="searchQuery" />
     <button class="btn btn-outline-secondary" type="button" @onclick="SearchMatches">Search</button>
 </div>
 
@@ -22,7 +21,7 @@
 
         <div class="col-3">
             <label class="form-label">Host Team</label>
-            <select class="form-control" @bind="newMatch.HostTeamId">
+            <select class="form-control" @bind="newMatch.HostTeamId" @bind:event="onchange">
                 <option value="">Select Team</option>
                 @foreach (var team in teams)
                 {
@@ -40,6 +39,11 @@
                     <option value="@team.TeamId">@team.TeamName</option>
                 }
             </select>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Stadium</label>
+            <input type="text" class="form-control" @bind="newMatch.Stadium">
         </div>
 
         <div class="col-3">
@@ -100,6 +104,7 @@
             <th>MatchId</th>
             <th>Host Team</th>
             <th>Guest Team</th>
+            <th>Stadium</th>
             <th>Final Results</th>
             <th>Main Referee</th>
             <th>Assistant Referee 1</th>
@@ -116,11 +121,12 @@
                 <td>@match.MatchId</td>
                 <td>@teams.FirstOrDefault(t => t.TeamId == match.HostTeamId)?.TeamName</td>
                 <td>@teams.FirstOrDefault(t => t.TeamId == match.GuestTeamId)?.TeamName</td>
+                <td>@match.Stadium</td>
                 <td>@match.FinalResult</td>
                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.RefereeId)?.RefereeName</td>
                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.AssistantReferee1Id)?.RefereeName</td>
                 <td>@referees.FirstOrDefault(r => r.RefereeId == match.AssistantReferee2Id)?.RefereeName</td>
-                <td>@match.DatePlayed</td>
+                <td>@match.DatePlayed.ToShortDateString()</td>
                 <td>@match.News</td>
                 <td>
                     <div class="d-flex">
@@ -184,6 +190,7 @@
             MatchId = match.MatchId,
             HostTeamId = match.HostTeamId,
             GuestTeamId = match.GuestTeamId,
+            Stadium = match.Stadium,
             FinalResult = match.FinalResult,
             RefereeId = match.RefereeId,
             AssistantReferee1Id = match.AssistantReferee1Id,
@@ -202,20 +209,24 @@
         }
         else
         {
+            string normalizedQuery = searchQuery.Trim().ToLower();
             filteredMatches = matches.Where(m =>
-            {
-                var hostTeam = teams.FirstOrDefault(t => t.TeamId == m.HostTeamId)?.TeamName;
-                var guestTeam = teams.FirstOrDefault(t => t.TeamId == m.GuestTeamId)?.TeamName;
-                var mainReferee = referees.FirstOrDefault(r => r.RefereeId == m.RefereeId)?.RefereeName;
-                var assistantReferee1 = referees.FirstOrDefault(r => r.RefereeId == m.AssistantReferee1Id)?.RefereeName;
-                var assistantReferee2 = referees.FirstOrDefault(r => r.RefereeId == m.AssistantReferee2Id)?.RefereeName;
+                (teams.FirstOrDefault(t => t.TeamId == m.HostTeamId)?.TeamName?.ToLower().Contains(normalizedQuery) ?? false) ||
+                (teams.FirstOrDefault(t => t.TeamId == m.GuestTeamId)?.TeamName?.ToLower().Contains(normalizedQuery) ?? false) ||
+                (referees.FirstOrDefault(r => r.RefereeId == m.RefereeId)?.RefereeName?.ToLower().Contains(normalizedQuery) ?? false) ||
+                (referees.FirstOrDefault(r => r.RefereeId == m.AssistantReferee1Id)?.RefereeName?.ToLower().Contains(normalizedQuery) ?? false) ||
+                (referees.FirstOrDefault(r => r.RefereeId == m.AssistantReferee2Id)?.RefereeName?.ToLower().Contains(normalizedQuery) ?? false))
+                .ToList();
+        }
+    }
 
-                return (hostTeam != null && hostTeam.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                       (guestTeam != null && guestTeam.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                       (mainReferee != null && mainReferee.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                       (assistantReferee1 != null && assistantReferee1.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                       (assistantReferee2 != null && assistantReferee2.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
-            }).ToList();
+    private void UpdateMainStadium(ChangeEventArgs e)
+    {
+        var selectedHostTeamId = int.Parse(e.Value.ToString());
+        var selectedTeam = teams.FirstOrDefault(t => t.TeamId == selectedHostTeamId);
+        if (selectedTeam != null)
+        {
+            newMatch.Stadium = selectedTeam.MainStadium;
         }
     }
 }

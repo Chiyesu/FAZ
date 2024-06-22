@@ -14,7 +14,7 @@
 }
 
 <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search by Player Name..." @bind="searchPlayer" />
+    <input type="text" class="form-control" placeholder="Search..." @bind="searchQuery" />
     <button class="btn btn-outline-secondary" type="button" @onclick="SearchPlayers">Search</button>
 </div>
 
@@ -99,7 +99,7 @@
     private bool isEditing = false;
     private bool showErrorMessage = false;
     private string errorMessage = string.Empty;
-    private string searchPlayer = "";
+    private string searchQuery = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,53 +108,53 @@
         filteredPlayers = players;
     }
 
-   public async Task SavePlayer()
-{
-    if (string.IsNullOrWhiteSpace(newPlayer.PlayerName) || 
-        newPlayer.DateOfBirth == default || 
-        newPlayer.ShirtNumber <= 0 || 
-        newPlayer.StartYear == default || 
-        newPlayer.TeamId == 0)
+    public async Task SavePlayer()
     {
-        errorMessage = "Please fill in all the details.";
-        showErrorMessage = true;
-        return;
-    }
+        if (string.IsNullOrWhiteSpace(newPlayer.PlayerName) || 
+            newPlayer.DateOfBirth == default || 
+            newPlayer.ShirtNumber <= 0 || 
+            newPlayer.StartYear == default || 
+            newPlayer.TeamId == 0)
+        {
+            errorMessage = "Please fill in all the details.";
+            showErrorMessage = true;
+            return;
+        }
 
-    if (!isEditing && players.Any(p => p.PlayerId == newPlayer.PlayerId))
-    {
-        errorMessage = $"Player with ID '{newPlayer.PlayerId}' already exists.";
-        showErrorMessage = true;
-        return;
-    }
+        if (!isEditing && players.Any(p => p.PlayerId == newPlayer.PlayerId))
+        {
+            errorMessage = $"Player with ID '{newPlayer.PlayerId}' already exists.";
+            showErrorMessage = true;
+            return;
+        }
 
-    if (players.Any(p =>
-        p.PlayerName.Equals(newPlayer.PlayerName, StringComparison.OrdinalIgnoreCase) &&
-        p.DateOfBirth == newPlayer.DateOfBirth &&
-        p.ShirtNumber == newPlayer.ShirtNumber &&
-        p.TeamId == newPlayer.TeamId &&
-        p.StartYear == newPlayer.StartYear))
-    {
-        errorMessage = $"A player with similar details already exists.";
-        showErrorMessage = true;
-        return;
-    }
+        if (players.Any(p =>
+            p.PlayerName.Equals(newPlayer.PlayerName, StringComparison.OrdinalIgnoreCase) &&
+            p.DateOfBirth == newPlayer.DateOfBirth &&
+            p.ShirtNumber == newPlayer.ShirtNumber &&
+            p.TeamId == newPlayer.TeamId &&
+            p.StartYear == newPlayer.StartYear))
+        {
+            errorMessage = $"A player with similar details already exists.";
+            showErrorMessage = true;
+            return;
+        }
 
-    if (isEditing)
-    {
-        await playerServices.Update(newPlayer); 
+        if (isEditing)
+        {
+            await playerServices.Update(newPlayer);
+        }
+        else
+        {
+            await playerServices.Post(newPlayer);
+        }
+
+        players = playerServices.Get();
+        newPlayer = new Player();
+        isEditing = false;
+        showErrorMessage = false;
+        StateHasChanged();
     }
-    else
-    {
-        await playerServices.Post(newPlayer);
-    }
-    
-    players = playerServices.Get();
-    newPlayer = new Player();
-    isEditing = false;
-    showErrorMessage = false;  
-    StateHasChanged();
-}
 
     public void EditPlayer(Player player)
     {
@@ -179,13 +179,21 @@
 
     public void SearchPlayers()
     {
-        if (string.IsNullOrWhiteSpace(searchPlayer))
+        if (string.IsNullOrWhiteSpace(searchQuery))
         {
-            filteredPlayers = players; 
+            filteredPlayers = players;
         }
         else
         {
-            filteredPlayers = players.Where(p => p.PlayerName.Contains(searchPlayer, StringComparison.OrdinalIgnoreCase)).ToList();
+            string normalizedQuery = searchQuery.Trim().ToLower();
+            filteredPlayers = players.Where(p =>
+                p.PlayerName.ToLower().Contains(normalizedQuery) ||
+                teams.Any(t => t.TeamId == p.TeamId && t.TeamName.ToLower().Contains(normalizedQuery)) ||
+                p.PlayerId.ToString().Contains(normalizedQuery) ||
+                p.DateOfBirth.ToShortDateString().ToLower().Contains(normalizedQuery) ||
+                p.ShirtNumber.ToString().Contains(normalizedQuery) ||
+                p.StartYear.ToShortDateString().ToLower().Contains(normalizedQuery))
+                .ToList();
         }
     }
 }
